@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useState } from 'react';
 
 export function useConfetti() {
-    const [confetti, setConfetti] = useState<typeof import('canvas-confetti').default | null>(null);
+    const [confetti, setConfetti] = useState<any>(null);
 
     useEffect(() => {
         // Charger canvas-confetti uniquement côté client
