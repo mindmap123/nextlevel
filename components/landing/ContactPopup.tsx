@@ -4,6 +4,7 @@ import { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { X, Phone } from "lucide-react";
 import { usePopup } from "./PopupContext";
+import { useConfetti } from "@/lib/useConfetti";
 
 const BUDGET_OPTIONS = [
   { value: "starter",   label: "1 000 – 5 000€" },
@@ -15,6 +16,7 @@ type BudgetValue = typeof BUDGET_OPTIONS[number]["value"];
 
 export default function ContactPopup() {
   const { isOpen, closePopup } = usePopup();
+  const { fireConfetti } = useConfetti();
 
   const [prenom, setPrenom] = useState("");
   const [email, setEmail] = useState("");
@@ -70,6 +72,7 @@ export default function ContactPopup() {
       });
       if (!res.ok) throw new Error("Erreur serveur");
       setSuccess(true);
+      fireConfetti(); // 🎉 Confettis au succès
       setTimeout(() => {
         closePopup();
         setSuccess(false);

@@ -1,8 +1,5 @@
 import Hero from "@/components/landing/Hero";
 import ServicesOfferts from "@/components/landing/ServicesOfferts";
-import SitesSurMesure from "@/components/landing/SitesSurMesure";
-import ApplicationsSurMesure from "@/components/landing/ApplicationsSurMesure";
-import GMBService from "@/components/landing/GMBService";
 import Processus from "@/components/landing/Processus";
 import Realisations from "@/components/landing/Realisations";
 import Temoignages from "@/components/landing/Temoignages";
@@ -18,9 +15,6 @@ export default function Home() {
       <main className="min-h-screen bg-white text-[#1A1A2E] font-body overflow-x-hidden">
         <Hero />
         <ServicesOfferts />
-        <SitesSurMesure />
-        <ApplicationsSurMesure />
-        <GMBService />
         <Processus />
         <Realisations />
         <Temoignages />

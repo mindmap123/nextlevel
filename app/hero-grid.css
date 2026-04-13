@@ -1,0 +1,35 @@
+@keyframes gridSlide {
+    0% {
+        background-position: 0 0;
+    }
+    100% {
+        background-position: 0 -100px;
+    }
+}
+
+.perspective-grid {
+    position: absolute;
+    inset: 0;
+    background-image: 
+        repeating-linear-gradient(
+            0deg,
+            transparent,
+            transparent 99px,
+            rgba(123, 47, 242, 0.5) 99px,
+            rgba(123, 47, 242, 0.5) 100px
+        ),
+        repeating-linear-gradient(
+            90deg,
+            transparent,
+            transparent 99px,
+            rgba(0, 102, 255, 0.5) 99px,
+            rgba(0, 102, 255, 0.5) 100px
+        );
+    background-size: 100px 100px;
+    animation: gridSlide 3s linear infinite;
+    transform: perspective(800px) rotateX(60deg);
+    transform-origin: center bottom;
+    height: 200%;
+    width: 100%;
+    pointer-events: none;
+}
