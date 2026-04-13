@@ -54,32 +54,42 @@ export default function ContactPopup() {
       return;
     }
     setLoading(true);
+    
     try {
-      const res = await fetch("/api/leads", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          prenom,
-          nom: prenom, // minimal popup — nom = prenom
-          email,
-          telephone,
-          budget: budget || "sur_devis",
-          typeService: "site_web",
-          message: "Demande de rappel via le formulaire popup.",
-          source: "contact",
-          statut: "nouveau",
-        }),
-      });
-      if (!res.ok) throw new Error("Erreur serveur");
+      // Formater le message pour WhatsApp
+      const budgetLabel = BUDGET_OPTIONS.find(opt => opt.value === budget)?.label || "Pas de budget défini";
+      const message = `🎯 *Nouvelle demande de contact*
+
+👤 *Prénom:* ${prenom}
+📧 *Email:* ${email}
+📱 *Téléphone:* ${telephone}
+💰 *Budget:* ${budgetLabel}
+
+_Demande envoyée depuis le site Next Level_`;
+
+      const phoneNumber = "+33626834020";
+      const whatsappUrl = `https://wa.me/${phoneNumber.replace(/\+/g, '')}?text=${encodeURIComponent(message)}`;
+      
+      // Afficher le succès et les confettis
       setSuccess(true);
-      fireConfetti(); // 🎉 Confettis au succès
+      fireConfetti();
+      
+      // Ouvrir WhatsApp après un court délai
+      setTimeout(() => {
+        window.open(whatsappUrl, '_blank');
+      }, 800);
+      
+      // Fermer le popup et réinitialiser
       setTimeout(() => {
         closePopup();
         setSuccess(false);
-        setPrenom(""); setEmail(""); setTelephone(""); setBudget("");
-      }, 2200);
+        setPrenom(""); 
+        setEmail(""); 
+        setTelephone(""); 
+        setBudget("");
+      }, 2500);
     } catch {
-      setError("Une erreur est survenue. Réessayez ou contactez-nous directement.");
+      setError("Une erreur est survenue. Réessayez.");
     } finally {
       setLoading(false);
     }
