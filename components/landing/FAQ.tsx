@@ -44,8 +44,8 @@ export default function FAQ() {
                     className="text-center mb-14"
                 >
                     <p className="text-[#7B2FF2] font-semibold text-sm uppercase tracking-wider mb-3">FAQ</p>
-                    <h2 className="text-3xl sm:text-4xl font-bold mb-4">
-                        Questions <span className="text-gradient">fréquentes</span>
+                    <h2 className="font-display text-3xl sm:text-4xl md:text-[48px] font-bold tracking-[-0.035em] leading-[1.08] mb-4">
+                        Questions <em className="not-italic text-gradient">fréquentes</em>
                     </h2>
                 </motion.div>
 
@@ -57,7 +57,7 @@ export default function FAQ() {
                             whileInView={{ opacity: 1, y: 0 }}
                             viewport={{ once: true }}
                             transition={{ delay: i * 0.05 }}
-                            className="border border-gray-100 rounded-2xl overflow-hidden bg-white hover:border-[#7B2FF2]/20 transition-colors"
+                            className="border border-[#E2E8F0] rounded-2xl overflow-hidden bg-white hover:border-[#7B2FF2]/20 transition-colors"
                         >
                             <button
                                 onClick={() => setOpenIndex(openIndex === i ? null : i)}

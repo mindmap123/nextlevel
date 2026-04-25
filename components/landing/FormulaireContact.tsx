@@ -1,59 +1,113 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { MessageCircle } from "lucide-react";
+import { MessageCircle, ArrowRight, Phone } from "lucide-react";
 import CTAButton from "@/components/ui/CTAButton";
+import { usePopup } from "./PopupContext";
 
 export default function FormulaireContact() {
+    const { openPopup } = usePopup();
     const phoneNumber = "+33626834020";
     const whatsappMessage = encodeURIComponent("Bonjour, j'ai un projet web à discuter avec vous !");
     const whatsappUrl = `https://wa.me/${phoneNumber.replace(/\+/g, '')}?text=${whatsappMessage}`;
 
     return (
-        <section id="contact" className="py-20 md:py-28 bg-[#F8F9FC] relative overflow-hidden">
-            {/* Decorative shapes */}
-            <div className="absolute top-20 right-[5%] w-4 h-4 rounded-full bg-[#7B2FF2]/10 animate-float" />
-            <div className="absolute bottom-32 left-[8%] w-3 h-3 rounded-sm bg-[#0066FF]/10 rotate-45 animate-float" style={{ animationDelay: "1s" }} />
-            <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-[#7B2FF2]/[0.04] rounded-full blur-[120px]" />
-            <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-[#0066FF]/[0.04] rounded-full blur-[120px]" />
+        <section id="contact" className="relative overflow-hidden">
+            {/* Full gradient background */}
+            <div
+                className="absolute inset-0"
+                style={{ background: "linear-gradient(135deg, #7B2FF2 0%, #0066FF 100%)" }}
+            />
 
-            <div className="container mx-auto px-5 relative z-10">
-                <div className="max-w-3xl mx-auto">
-                    {/* Header */}
+            {/* Decorative orbs */}
+            <div className="absolute top-0 right-0 w-[600px] h-[600px] rounded-full bg-white/[0.06] blur-3xl pointer-events-none -translate-y-1/2 translate-x-1/4" />
+            <div className="absolute bottom-0 left-0 w-[500px] h-[500px] rounded-full bg-white/[0.06] blur-3xl pointer-events-none translate-y-1/2 -translate-x-1/4" />
+
+            {/* Dot grid overlay */}
+            <div
+                className="absolute inset-0 opacity-[0.08] pointer-events-none"
+                style={{
+                    backgroundImage: "radial-gradient(circle, white 1px, transparent 1px)",
+                    backgroundSize: "28px 28px",
+                }}
+            />
+
+            <div className="max-w-[1200px] mx-auto px-5 py-20 md:py-28 relative z-10">
+                <div className="max-w-2xl mx-auto text-center">
                     <motion.div
-                        initial={{ opacity: 0, y: 20 }}
+                        initial={{ opacity: 0, y: 24 }}
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true }}
-                        className="text-center mb-10"
+                        transition={{ duration: 0.5 }}
                     >
-                        <p className="text-[#7B2FF2] font-semibold text-sm uppercase tracking-wider mb-3">Parlons de votre projet</p>
-                        <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4">
-                            Prêt à <span className="text-gradient">passer au niveau supérieur</span> ?
+                        <p className="text-white/70 font-bold text-xs uppercase tracking-[0.12em] mb-4">
+                            Parlons de votre projet
+                        </p>
+                        <h2 className="font-display text-3xl sm:text-4xl md:text-[52px] font-bold tracking-[-0.04em] leading-[1.05] text-white mb-5">
+                            Prêt à passer au{" "}
+                            <em className="not-italic text-white/90 underline decoration-white/30 underline-offset-4">
+                                niveau supérieur
+                            </em>{" "}
+                            ?
                         </h2>
-                        <p className="text-slate-500 text-lg">Vous avez un projet ? Parlons-en sur WhatsApp</p>
+                        <p className="text-white/75 text-base sm:text-lg leading-relaxed mb-10">
+                            On analyse votre situation, on vous donne notre avis honnête,<br className="hidden sm:block" /> et on vous dit comment on peut vous aider.
+                        </p>
                     </motion.div>
 
                     <motion.div
-                        initial={{ opacity: 0, y: 20 }}
+                        initial={{ opacity: 0, y: 16 }}
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true }}
-                        className="bg-white border border-gray-100 rounded-3xl p-8 sm:p-10 md:p-12 shadow-lg text-center"
+                        transition={{ duration: 0.5, delay: 0.15 }}
+                        className="flex flex-col sm:flex-row items-center justify-center gap-3"
                     >
-                        {/* WhatsApp CTA */}
+                        {/* Primary CTA */}
                         <CTAButton
+                            onClick={openPopup}
+                            className="
+                                inline-flex items-center gap-2.5
+                                bg-white text-[#7B2FF2] font-bold text-base
+                                px-7 py-4 rounded-xl
+                                shadow-[0_8px_32px_rgba(0,0,0,0.2)]
+                                hover:bg-white/95 hover:-translate-y-0.5
+                                transition-all duration-200
+                                w-full sm:w-auto justify-center
+                            "
+                        >
+                            Être recontacté
+                            <ArrowRight className="w-4 h-4" />
+                        </CTAButton>
+
+                        {/* WhatsApp secondary */}
+                        <a
                             href={whatsappUrl}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="inline-flex items-center justify-center gap-3 bg-[#25D366] hover:bg-[#20BA5A] text-white font-bold py-5 px-8 rounded-xl transition-all duration-300 shadow-lg hover:shadow-xl hover:-translate-y-0.5 text-lg"
+                            className="
+                                inline-flex items-center gap-2.5
+                                bg-white/15 border border-white/30 text-white font-bold text-base
+                                px-7 py-4 rounded-xl
+                                hover:bg-white/25 hover:-translate-y-0.5
+                                transition-all duration-200
+                                w-full sm:w-auto justify-center
+                                backdrop-blur-sm
+                            "
                         >
-                            <MessageCircle className="w-6 h-6" />
-                            Discuter sur WhatsApp
-                        </CTAButton>
-
-                        <p className="text-slate-500 text-sm mt-6 max-w-md mx-auto">
-                            Réponse rapide • Sans engagement • Devis gratuit
-                        </p>
+                            <MessageCircle className="w-4 h-4" />
+                            WhatsApp
+                        </a>
                     </motion.div>
+
+                    <motion.p
+                        initial={{ opacity: 0 }}
+                        whileInView={{ opacity: 1 }}
+                        viewport={{ once: true }}
+                        transition={{ delay: 0.3 }}
+                        className="text-white/50 text-xs mt-6"
+                    >
+                        Réponse sous 24h · Sans engagement · Devis gratuit
+                    </motion.p>
                 </div>
             </div>
         </section>

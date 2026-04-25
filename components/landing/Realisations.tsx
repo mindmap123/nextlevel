@@ -71,7 +71,7 @@ export default function Realisations() {
             <div className="absolute top-20 right-[6%] w-20 h-20 rounded-full border-2 border-[#0066FF]/8" />
             <div className="absolute bottom-12 left-[10%] w-3 h-3 rounded-full bg-[#7B2FF2]/15 animate-float" />
 
-            <div className="container mx-auto px-5 relative z-10">
+            <div className="max-w-[1200px] mx-auto px-5 relative z-10">
                 <motion.div
                     initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
@@ -79,8 +79,8 @@ export default function Realisations() {
                     className="text-center mb-14"
                 >
                     <p className="text-[#7B2FF2] font-semibold text-sm uppercase tracking-wider mb-3">Nos réalisations</p>
-                    <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4">
-                        Des projets qui <span className="text-gradient">parlent d&apos;eux-mêmes</span>
+                    <h2 className="font-display text-3xl sm:text-4xl md:text-[48px] font-bold tracking-[-0.035em] leading-[1.08] mb-4">
+                        Des projets qui <em className="not-italic text-gradient">parlent d&apos;eux-mêmes</em>
                     </h2>
                     <p className="text-slate-500 max-w-xl mx-auto text-lg">
                         Chaque projet est une collaboration unique avec un objectif commun : la croissance.
@@ -95,7 +95,7 @@ export default function Realisations() {
                             whileInView={{ opacity: 1, y: 0 }}
                             viewport={{ once: true }}
                             transition={{ delay: i * 0.15 }}
-                            className="group bg-white rounded-2xl border border-gray-100 overflow-hidden hover:shadow-2xl hover:border-[#7B2FF2]/20 transition-all duration-500 md:hover:scale-125 md:hover:z-20"
+                            className="group bg-white rounded-2xl border border-[#E2E8F0] overflow-hidden hover:shadow-brand-lg hover:border-[#7B2FF2]/20 hover:-translate-y-1 transition-all duration-300 relative"
                         >
                             {/* Project Media */}
                             <div className="relative overflow-hidden">

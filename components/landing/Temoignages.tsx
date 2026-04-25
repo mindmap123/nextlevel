@@ -61,7 +61,7 @@ export default function Temoignages() {
             <div className="absolute top-10 left-[6%] w-16 h-16 rounded-full border-2 border-[#7B2FF2]/8" />
             <div className="absolute bottom-16 right-[8%] w-4 h-4 rounded-full bg-[#0066FF]/10 animate-float" style={{ animationDelay: "0.7s" }} />
 
-            <div className="container mx-auto px-5 relative z-10">
+            <div className="max-w-[1200px] mx-auto px-5 relative z-10">
                 <motion.div
                     initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
@@ -69,8 +69,8 @@ export default function Temoignages() {
                     className="text-center mb-14"
                 >
                     <p className="text-[#7B2FF2] font-semibold text-sm uppercase tracking-wider mb-3">Témoignages</p>
-                    <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4">
-                        Des résultats, <span className="text-gradient">pas des promesses</span>
+                    <h2 className="font-display text-3xl sm:text-4xl md:text-[48px] font-bold tracking-[-0.035em] leading-[1.08] mb-4">
+                        Des résultats, <em className="not-italic text-gradient">pas des promesses</em>
                     </h2>
                 </motion.div>
 
@@ -82,7 +82,7 @@ export default function Temoignages() {
                             whileInView={{ opacity: 1, y: 0 }}
                             viewport={{ once: true }}
                             transition={{ delay: i * 0.15 }}
-                            className="group bg-white p-7 rounded-2xl border border-gray-100 relative hover:shadow-xl hover:border-[#7B2FF2]/20 transition-all duration-500 shrink-0 w-[80vw] sm:w-[60vw] md:w-auto"
+                            className="group bg-white p-7 rounded-2xl border border-[#E2E8F0] relative hover:shadow-xl hover:border-[#7B2FF2]/20 transition-all duration-500 shrink-0 w-[80vw] sm:w-[60vw] md:w-auto"
                         >
                             <Quote className="absolute top-7 right-7 text-[#7B2FF2]/[0.07] w-12 h-12" />
 

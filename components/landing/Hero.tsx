@@ -1,11 +1,11 @@
 "use client";
 
-import { motion, useMotionValue, useSpring } from "framer-motion";
+import { motion } from "framer-motion";
 import Image from "next/image";
 import { ArrowRight, Zap, TrendingUp, Globe } from "lucide-react";
 import { usePopup } from "./PopupContext";
-import { useEffect, useRef } from "react";
 import CTAButton from "@/components/ui/CTAButton";
+import AnimatedGradient from "@/components/ui/animated-gradient";
 
 const STATS = [
   { num: "+80", label: "projets livrés" },
@@ -50,89 +50,6 @@ function FloatingPill({ pill }: { pill: typeof FLOATING_PILLS[0] }) {
 
 export default function Hero() {
   const { openPopup } = usePopup();
-  const canvasRef = useRef<HTMLCanvasElement>(null);
-
-  // Subtle particle / grid animation on canvas
-  useEffect(() => {
-    const canvas = canvasRef.current;
-    if (!canvas) return;
-    const ctx = canvas.getContext("2d");
-    if (!ctx) return;
-
-    let raf: number;
-    const resize = () => {
-      canvas.width = canvas.offsetWidth * window.devicePixelRatio;
-      canvas.height = canvas.offsetHeight * window.devicePixelRatio;
-      ctx.scale(window.devicePixelRatio, window.devicePixelRatio);
-    };
-    resize();
-    window.addEventListener("resize", resize);
-
-    const W = () => canvas.offsetWidth;
-    const H = () => canvas.offsetHeight;
-
-    // Dots grid
-    const COLS = 14;
-    const ROWS = 8;
-
-    let t = 0;
-    const draw = () => {
-      ctx.clearRect(0, 0, W(), H());
-      const colGap = W() / (COLS - 1);
-      const rowGap = H() / (ROWS - 1);
-
-      for (let r = 0; r < ROWS; r++) {
-        for (let c = 0; c < COLS; c++) {
-          const x = c * colGap;
-          const y = r * rowGap;
-          const wave = Math.sin(t * 0.8 + c * 0.5 + r * 0.7) * 0.5 + 0.5;
-          const alpha = 0.04 + wave * 0.10;
-          const radius = 1.5 + wave * 1.5;
-
-          // Gradient color based on position
-          const progress = c / COLS;
-          const r1 = Math.round(123 + (0 - 123) * progress);
-          const g1 = Math.round(47 + (102 - 47) * progress);
-          const b1 = Math.round(242 + (255 - 242) * progress);
-
-          ctx.beginPath();
-          ctx.arc(x, y, radius, 0, Math.PI * 2);
-          ctx.fillStyle = `rgba(${r1},${g1},${b1},${alpha})`;
-          ctx.fill();
-        }
-      }
-
-      // Flowing gradient lines
-      for (let i = 0; i < 3; i++) {
-        const lineY = H() * (0.2 + i * 0.3);
-        const offset = Math.sin(t * 0.5 + i * 2) * 30;
-        const grad = ctx.createLinearGradient(0, 0, W(), 0);
-        grad.addColorStop(0, "rgba(123,47,242,0)");
-        grad.addColorStop(0.3 + Math.sin(t * 0.3 + i) * 0.1, "rgba(123,47,242,0.04)");
-        grad.addColorStop(0.7, "rgba(0,102,255,0.04)");
-        grad.addColorStop(1, "rgba(0,102,255,0)");
-
-        ctx.beginPath();
-        ctx.moveTo(0, lineY + offset);
-        for (let x = 0; x < W(); x += 4) {
-          const y = lineY + Math.sin((x / W()) * Math.PI * 4 + t * 0.6 + i) * 18 + offset;
-          ctx.lineTo(x, y);
-        }
-        ctx.strokeStyle = grad;
-        ctx.lineWidth = 1.5;
-        ctx.stroke();
-      }
-
-      t += 0.015;
-      raf = requestAnimationFrame(draw);
-    };
-    draw();
-
-    return () => {
-      cancelAnimationFrame(raf);
-      window.removeEventListener("resize", resize);
-    };
-  }, []);
 
   return (
     <>
@@ -165,19 +82,29 @@ export default function Hero() {
 
       {/* ── HERO ────────────────────────────────────────── */}
       <section className="bg-white overflow-hidden relative">
-        {/* Animated canvas background */}
-        <canvas
-          ref={canvasRef}
-          className="absolute inset-0 w-full h-full pointer-events-none"
-          style={{ opacity: 1 }}
+        {/* WebGL animated gradient — léger, couleurs brand */}
+        <AnimatedGradient
+          config={{
+            preset: "custom",
+            color1: "#FFFFFF",
+            color2: "#9B6FFF",
+            color3: "#6BAAFF",
+            rotation: 15,
+            proportion: 38,
+            scale: 0.3,
+            speed: 35,
+            distortion: 3,
+            swirl: 40,
+            swirlIterations: 6,
+            softness: 100,
+            offset: 0,
+            shape: "Checks",
+            shapeSize: 40,
+          }}
+          style={{ opacity: 0.55 }}
         />
 
-        {/* Soft radial glow top-right */}
-        <div className="absolute top-0 right-0 w-[600px] h-[600px] rounded-full bg-gradient-to-bl from-[#7B2FF2]/[0.06] via-[#0066FF]/[0.03] to-transparent pointer-events-none" />
-        {/* Soft radial glow bottom-left */}
-        <div className="absolute bottom-0 left-0 w-[400px] h-[400px] rounded-full bg-gradient-to-tr from-[#0066FF]/[0.04] to-transparent pointer-events-none" />
-
-        <div className="max-w-[1200px] mx-auto px-5 pt-10 pb-14 sm:pt-16 sm:pb-20 relative">
+        <div className="max-w-[1200px] mx-auto px-5 pt-10 pb-14 sm:pt-16 sm:pb-20 relative z-10">
 
           {/* Floating pills (desktop) */}
           {FLOATING_PILLS.map((pill) => (
@@ -210,7 +137,8 @@ export default function Hero() {
           >
             Vous êtes bon dans
             <br />
-            votre business.{" "}
+            votre business.
+            <br />
             <em className="not-italic text-gradient">
               On s'assure que ça se voit sur internet.
             </em>
@@ -267,7 +195,7 @@ export default function Hero() {
                 <div className="font-display text-2xl sm:text-3xl font-bold tracking-tight leading-none text-gradient">
                   {s.num}
                 </div>
-                <div className="text-xs text-[#94A3B8] mt-1.5 font-medium">
+                <div className="text-xs text-[#64748B] mt-1.5 font-medium">
                   {s.label}
                 </div>
               </motion.div>
@@ -275,22 +203,55 @@ export default function Hero() {
           </motion.div>
         </div>
 
-        {/* ── LOGO STRIP ──────────────────────────────── */}
-        <div className="border-y border-[#F1F5F9] bg-[#F8F9FC] py-7 px-5 overflow-hidden relative">
-          <p className="text-[10px] font-bold uppercase tracking-[0.1em] text-[#94A3B8] mb-3 text-center">
+        {/* ── LOGO STRIP — perspective marquee ───────── */}
+        <div className="border-y border-[#F1F5F9] bg-[#F8F9FC] py-8 overflow-hidden relative">
+          <p className="text-[10px] font-bold uppercase tracking-[0.1em] text-[#94A3B8] mb-5 text-center">
             Ils nous font confiance
           </p>
-          <div className="relative overflow-hidden">
-            <div className="flex gap-10 animate-infinite-scroll w-max">
-              {[...CLIENTS, ...CLIENTS].map((name, i) => (
-                <span
-                  key={i}
-                  className="font-display text-sm font-bold text-[#94A3B8] opacity-50 whitespace-nowrap"
-                >
-                  {name}
-                </span>
-              ))}
+
+          {/* 3D perspective container */}
+          <div
+            className="relative overflow-hidden"
+            style={{ perspective: "1200px" }}
+          >
+            {/* Rotating plane */}
+            <div
+              style={{
+                transform: "rotateX(8deg) rotateY(-18deg)",
+                transformStyle: "preserve-3d",
+              }}
+            >
+              <div className="flex gap-12 animate-infinite-scroll w-max">
+                {[...CLIENTS, ...CLIENTS, ...CLIENTS].map((name, i) => {
+                  const total = CLIENTS.length * 3;
+                  const pos = i / total;
+                  const dist = Math.abs(pos - 0.5) * 2;
+                  return (
+                    <span
+                      key={i}
+                      className="font-display text-base font-bold whitespace-nowrap"
+                      style={{
+                        color: "#1A1A2E",
+                        opacity: 0.18 + (1 - dist) * 0.38,
+                        filter: `blur(${dist * 1.5}px)`,
+                        letterSpacing: "-0.03em",
+                      }}
+                    >
+                      {name}
+                    </span>
+                  );
+                })}
+              </div>
             </div>
+
+            {/* Left / right fade */}
+            <div className="absolute inset-0 pointer-events-none"
+              style={{ background: "linear-gradient(90deg, #F8F9FC 0%, transparent 18%, transparent 82%, #F8F9FC 100%)" }}
+            />
+            {/* Top / bottom fade */}
+            <div className="absolute inset-0 pointer-events-none"
+              style={{ background: "linear-gradient(180deg, #F8F9FC 0%, transparent 30%, transparent 70%, #F8F9FC 100%)" }}
+            />
           </div>
         </div>
       </section>

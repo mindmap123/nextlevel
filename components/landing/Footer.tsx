@@ -9,7 +9,7 @@ export default function Footer() {
 
     return (
         <footer className="bg-[#1A1A2E] text-white py-16">
-            <div className="container mx-auto px-5">
+            <div className="max-w-[1200px] mx-auto px-5">
                 <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-10 mb-12">
                     <div className="sm:col-span-2 lg:col-span-1">
                         <Link href="/" className="block mb-4">
