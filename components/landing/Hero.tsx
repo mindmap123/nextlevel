@@ -30,7 +30,7 @@ export default function Hero() {
         <AnimatedGradient
           config={{
             preset: "custom",
-            color1: "#FFFFFF", color2: "#9B6FFF", color3: "#6BAAFF",
+            color1: "#EDE4FF", color2: "#9B6FFF", color3: "#6BAAFF",
             rotation: 15, proportion: 38, scale: 0.3, speed: 35,
             distortion: 3, swirl: 40, swirlIterations: 6,
             softness: 100, offset: 0, shape: "Checks", shapeSize: 40,
@@ -41,8 +41,9 @@ export default function Hero() {
         {/* ── NAV ── */}
         <nav className="sticky top-0 z-50 bg-transparent">
           <div className="max-w-[1200px] mx-auto px-5 h-16 pt-3 lg:h-28 lg:pt-0 flex items-center justify-center lg:justify-between">
-            <Image src="/logos/next-level-logo.svg" alt="Next Level"
-              width={560} height={90} className="h-11 sm:h-14 w-auto" priority />
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img src="/logos/next-level-logo.svg" alt="Next Level"
+              className="h-11 sm:h-14 w-auto" />
             {/* CTA desktop uniquement */}
             <CTAButton onClick={openPopup} className="
               hidden lg:inline-flex items-center gap-2
