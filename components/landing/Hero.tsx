@@ -42,7 +42,7 @@ export default function Hero() {
         <nav className="sticky top-0 z-50 bg-transparent">
           <div className="max-w-[1200px] mx-auto px-5 h-16 pt-3 lg:h-28 lg:pt-0 flex items-center justify-center lg:justify-between">
             <Image src="/logos/next-level-logo.svg" alt="Next Level"
-              width={560} height={90} className="h-10 sm:h-14 w-auto" priority />
+              width={560} height={90} className="h-11 sm:h-14 w-auto" priority />
             {/* CTA desktop uniquement */}
             <CTAButton onClick={openPopup} className="
               hidden lg:inline-flex items-center gap-2
@@ -134,7 +134,7 @@ export default function Hero() {
 
           {/* Mobile : colonne unique */}
           <div className="lg:hidden relative z-10">
-            <div className="px-5 pt-8 pb-6">
+            <div className="px-5 pt-3 pb-6">
               <motion.div initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.4 }}>
                 <div className="inline-flex items-center gap-2 bg-[#F0E8FF] text-[#7B2FF2] border border-[#7B2FF2]/20 rounded-full px-3.5 py-1.5 text-xs font-bold mb-5">
                   <span className="w-1.5 h-1.5 rounded-full bg-[#7B2FF2] animate-pulse" />
