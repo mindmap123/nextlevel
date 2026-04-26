@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { MessageCircle, ArrowRight, Phone } from "lucide-react";
+import { MessageCircle, ArrowRight } from "lucide-react";
 import CTAButton from "@/components/ui/CTAButton";
 import { usePopup } from "./PopupContext";
 

@@ -214,26 +214,17 @@ export default function Hero() {
             <p className="text-[10px] font-bold uppercase tracking-[0.1em] text-[#94A3B8] mb-5 text-center">
               Ils nous font confiance
             </p>
-            <div className="relative" style={{ perspective: "1200px" }}>
-              <div style={{ transform: "rotateX(4deg) rotateY(-8deg)", transformStyle: "preserve-3d" }}>
-                <div className="flex gap-20 animate-infinite-scroll w-max py-2">
-                  {[...CLIENTS, ...CLIENTS, ...CLIENTS].map((name, i) => {
-                    const total = CLIENTS.length * 3;
-                    const pos = i / total;
-                    const dist = Math.abs(pos - 0.5) * 2;
-                    return (
-                      <span key={i} className="font-display text-2xl font-bold whitespace-nowrap"
-                        style={{ color: "#1A1A2E", opacity: 0.18 + (1 - dist) * 0.38, filter: `blur(${dist * 1.5}px)`, letterSpacing: "-0.03em" }}>
-                        {name}
-                      </span>
-                    );
-                  })}
-                </div>
+            <div className="relative overflow-hidden">
+              <div className="flex gap-16 animate-infinite-scroll w-max py-1" style={{ willChange: "transform" }}>
+                {[...CLIENTS, ...CLIENTS, ...CLIENTS, ...CLIENTS].map((name, i) => (
+                  <span key={i} className="font-display text-2xl font-bold whitespace-nowrap select-none"
+                    style={{ color: "#1A1A2E", opacity: 0.35, letterSpacing: "-0.03em" }}>
+                    {name}
+                  </span>
+                ))}
               </div>
               <div className="absolute inset-0 pointer-events-none"
-                style={{ background: "linear-gradient(90deg, #F8F9FC 0%, transparent 18%, transparent 82%, #F8F9FC 100%)" }} />
-              <div className="absolute inset-0 pointer-events-none"
-                style={{ background: "linear-gradient(180deg, #F8F9FC 0%, transparent 30%, transparent 70%, #F8F9FC 100%)" }} />
+                style={{ background: "linear-gradient(90deg, #F8F9FC 0%, transparent 15%, transparent 85%, #F8F9FC 100%)" }} />
             </div>
           </div>
         </section>

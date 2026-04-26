@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Globe, MapPin, Wrench, ArrowRight, Check } from "lucide-react";
+import { Globe, MapPin, Wrench, ArrowRight } from "lucide-react";
 import { usePopup } from "./PopupContext";
 import GradientWaveText from "@/components/ui/gradient-wave-text";
 
