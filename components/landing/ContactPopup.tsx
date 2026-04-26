@@ -143,7 +143,7 @@ _Demande envoyée depuis le site Next Level_`;
             <div className="mb-5">
               <div className="inline-flex items-center gap-1.5 bg-[#F0E8FF] text-[#7B2FF2] rounded-full px-3 py-1 text-xs font-bold mb-3">
                 <Phone className="w-3 h-3" />
-                Rappel sous 24h
+                Rappel immédiat
               </div>
               <h2 className="font-display text-[22px] font-bold tracking-tight leading-tight">
                 Être recontacté
