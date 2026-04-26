@@ -36,14 +36,20 @@ export default function Hero() {
             softness: 100, offset: 0, shape: "Checks", shapeSize: 40,
           }}
           style={{ opacity: 0.55 }}
+          className="fixed inset-0 w-full h-full z-0"
         />
 
         {/* ── NAV ── */}
         <nav className="sticky top-0 z-50 bg-transparent">
-          <div className="max-w-[1200px] mx-auto px-5 h-16 pt-3 lg:h-28 lg:pt-0 flex items-center justify-center lg:justify-between">
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src="/logos/next-level-logo.svg" alt="Next Level"
-              className="h-11 sm:h-14 w-auto" />
+          <div className="max-w-[1200px] mx-auto px-5 h-16 pt-4 lg:h-28 lg:pt-0 flex items-center justify-center lg:justify-between">
+            <Image 
+              src="/logos/next-level-logo.svg" 
+              alt="Next Level"
+              width={180}
+              height={56}
+              className="h-10 sm:h-12 lg:h-14 w-auto"
+              priority
+            />
             {/* CTA desktop uniquement */}
             <CTAButton onClick={openPopup} className="
               hidden lg:inline-flex items-center gap-2
