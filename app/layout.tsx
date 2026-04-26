@@ -25,7 +25,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="fr" className={`${fraunces.variable} ${plusJakartaSans.variable} scroll-smooth`}>
+    <html lang="fr" className={`${fraunces.variable} ${plusJakartaSans.variable} scroll-smooth`} suppressHydrationWarning>
       <body className="bg-white text-[#1A1A2E] min-h-screen font-body antialiased">
         {children}
       </body>

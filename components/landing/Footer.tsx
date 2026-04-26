@@ -1,3 +1,5 @@
+"use client";
+
 import Link from "next/link";
 import Image from "next/image";
 import { MessageCircle, ArrowUpRight } from "lucide-react";
@@ -8,8 +10,9 @@ export default function Footer() {
     const whatsappUrl = `https://wa.me/${phoneNumber.replace(/\+/g, '')}?text=${whatsappMessage}`;
 
     return (
-        <footer className="bg-[#1A1A2E] text-white py-16">
-            <div className="max-w-[1200px] mx-auto px-5">
+        <footer className="relative text-white py-16">
+
+            <div className="max-w-[1200px] mx-auto px-5 relative z-10">
                 <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-10 mb-12">
                     <div className="sm:col-span-2 lg:col-span-1">
                         <Link href="/" className="block mb-4">
@@ -24,7 +27,7 @@ export default function Footer() {
                         <p className="text-slate-400 text-sm leading-relaxed mb-4">
                             Nous transformons votre expertise en présence digitale performante. Sites web, applications sur mesure et visibilité locale pour générer des clients qualifiés.
                         </p>
-                        <a 
+                        <a
                             href={whatsappUrl}
                             target="_blank"
                             rel="noopener noreferrer"

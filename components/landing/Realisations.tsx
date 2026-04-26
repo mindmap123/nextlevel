@@ -3,6 +3,7 @@
 import { motion } from "framer-motion";
 import Image from "next/image";
 import { ArrowUpRight } from "lucide-react";
+import GradientWaveText from "@/components/ui/gradient-wave-text";
 
 type Project =
   | { title: string; category: string; description: string; result: string; video: string; image?: never }
@@ -82,9 +83,20 @@ export default function Realisations() {
                     <h2 className="font-display text-3xl sm:text-4xl md:text-[48px] font-bold tracking-[-0.035em] leading-[1.08] mb-4">
                         Des projets qui <em className="not-italic text-gradient">parlent d&apos;eux-mêmes</em>
                     </h2>
-                    <p className="text-slate-500 max-w-xl mx-auto text-lg">
-                        Chaque projet est une collaboration unique avec un objectif commun : la croissance.
-                    </p>
+                    <div className="max-w-xl mx-auto" style={{ "--gradient-wave-base": "rgb(100,116,139)" } as React.CSSProperties}>
+                        <GradientWaveText
+                          align="center"
+                          inView
+                          repeat
+                          speed={0.18}
+                          bandGap={10}
+                          bandCount={4}
+                          customColors={["#7B2FF2", "#9B6FFF", "#0066FF", "#6BAAFF"]}
+                          className="text-lg"
+                        >
+                          Chaque projet est une collaboration unique avec un objectif commun : la croissance.
+                        </GradientWaveText>
+                    </div>
                 </motion.div>
 
                 <div className="grid md:grid-cols-3 gap-6 max-w-6xl mx-auto">

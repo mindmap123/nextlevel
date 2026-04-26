@@ -13,24 +13,7 @@ export default function FormulaireContact() {
 
     return (
         <section id="contact" className="relative overflow-hidden">
-            {/* Full gradient background */}
-            <div
-                className="absolute inset-0"
-                style={{ background: "linear-gradient(135deg, #7B2FF2 0%, #0066FF 100%)" }}
-            />
 
-            {/* Decorative orbs */}
-            <div className="absolute top-0 right-0 w-[600px] h-[600px] rounded-full bg-white/[0.06] blur-3xl pointer-events-none -translate-y-1/2 translate-x-1/4" />
-            <div className="absolute bottom-0 left-0 w-[500px] h-[500px] rounded-full bg-white/[0.06] blur-3xl pointer-events-none translate-y-1/2 -translate-x-1/4" />
-
-            {/* Dot grid overlay */}
-            <div
-                className="absolute inset-0 opacity-[0.08] pointer-events-none"
-                style={{
-                    backgroundImage: "radial-gradient(circle, white 1px, transparent 1px)",
-                    backgroundSize: "28px 28px",
-                }}
-            />
 
             <div className="max-w-[1200px] mx-auto px-5 py-20 md:py-28 relative z-10">
                 <div className="max-w-2xl mx-auto text-center">

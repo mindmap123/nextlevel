@@ -3,6 +3,7 @@
 import { motion } from "framer-motion";
 import { Globe, MapPin, Wrench, ArrowRight, Check } from "lucide-react";
 import { usePopup } from "./PopupContext";
+import GradientWaveText from "@/components/ui/gradient-wave-text";
 
 const PILLARS = [
   {
@@ -56,9 +57,20 @@ export default function ServicesOfferts() {
             Trois expertises,{" "}
             <em className="not-italic text-gradient">un seul objectif</em>
           </h2>
-          <p className="text-[#64748B] mt-4 text-base sm:text-lg max-w-[480px]">
-            Faire croître votre business grâce au digital.
-          </p>
+          <div className="mt-4 max-w-[480px]" style={{ "--gradient-wave-base": "rgb(100,116,139)" } as React.CSSProperties}>
+            <GradientWaveText
+              align="left"
+              inView
+              repeat
+              speed={0.18}
+              bandGap={10}
+              bandCount={4}
+              customColors={["#7B2FF2", "#9B6FFF", "#0066FF", "#6BAAFF"]}
+              className="text-base sm:text-lg"
+            >
+              Faire croître votre business grâce au digital.
+            </GradientWaveText>
+          </div>
         </motion.div>
 
         {/* Cards */}

@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import { Phone, Palette, Code, Rocket } from "lucide-react";
+import GradientWaveText from "@/components/ui/gradient-wave-text";
 
 const STEPS = [
   {
@@ -14,19 +15,19 @@ const STEPS = [
     title: "Design & UX",
     desc: "Maquettes interactives validées avec vous avant le moindre code.",
     icon: Palette,
-    duration: "J+2",
+    duration: "J+1",
   },
   {
     title: "Développement",
     desc: "Code propre, rapide et optimisé. Vous suivez l'avancement en temps réel.",
     icon: Code,
-    duration: "J+5",
+    duration: "J+4",
   },
   {
     title: "Livraison & Suivi",
     desc: "Mise en ligne, formation et suivi des performances pendant 3 mois.",
     icon: Rocket,
-    duration: "J+14",
+    duration: "J+7",
   },
 ];
 
@@ -47,9 +48,20 @@ export default function Processus() {
           <h2 className="font-display text-3xl sm:text-4xl md:text-[48px] font-bold tracking-[-0.035em] leading-[1.08] mb-4">
             Du brief au <em className="not-italic text-gradient">résultat</em>
           </h2>
-          <p className="text-[#64748B] text-base sm:text-lg max-w-[440px] mx-auto">
-            Un process rodé, des délais tenus. Votre site en 14 jours, pas 3 mois.
-          </p>
+          <div className="max-w-[440px] mx-auto" style={{ "--gradient-wave-base": "rgb(100,116,139)" } as React.CSSProperties}>
+            <GradientWaveText
+              align="center"
+              inView
+              repeat
+              speed={0.18}
+              bandGap={10}
+              bandCount={4}
+              customColors={["#7B2FF2", "#9B6FFF", "#0066FF", "#6BAAFF"]}
+              className="text-base sm:text-lg"
+            >
+              Un process rodé, des délais tenus. Votre site en 7 jours, pas 3 mois.
+            </GradientWaveText>
+          </div>
         </motion.div>
 
         {/* Steps */}
