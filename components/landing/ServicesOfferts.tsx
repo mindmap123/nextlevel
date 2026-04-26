@@ -52,7 +52,7 @@ export default function ServicesOfferts() {
           viewport={{ once: true }}
           className="mb-12"
         >
-          <p className="text-[#7B2FF2] font-bold text-xs uppercase tracking-[0.12em] mb-3">Ce qu'on fait</p>
+          <p className="text-[#7B2FF2] font-bold text-xs uppercase tracking-[0.12em] mb-3">Ce que l'on fait</p>
           <h2 className="font-display text-3xl sm:text-4xl md:text-[52px] font-bold tracking-[-0.035em] leading-[1.05] text-[#1A1A2E] max-w-[16ch]">
             Trois expertises,{" "}
             <em className="not-italic text-gradient">un seul objectif</em>
