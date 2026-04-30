@@ -18,7 +18,7 @@ const STATS = [
 
 const CLIENTS = [
   "Kimbrandesign", "Sompower", "Archidomo",
-  "Iberdrola", "Francecanapé", "T Design", "Griph",
+  "Iberdrola", "Francecanapé", "Arnaud Energies", "22h22", "Wegoboard", "L'atelier", "Griph",
 ];
 
 export default function Hero() {
@@ -27,6 +27,7 @@ export default function Hero() {
   return (
     <>
       <div className="relative bg-white">
+        <div className="mobile-ambient-gradient absolute inset-0 z-0 sm:hidden" />
         <AnimatedGradient
           config={{
             preset: "custom",
@@ -36,18 +37,26 @@ export default function Hero() {
             softness: 100, offset: 0, shape: "Checks", shapeSize: 40,
           }}
           style={{ opacity: 0.55 }}
-          className="fixed inset-0 w-full h-full z-0"
+          className="hidden sm:block fixed inset-0 w-full h-full z-0"
         />
 
         {/* ── NAV ── */}
         <nav className="sticky top-0 z-50 bg-transparent">
           <div className="max-w-[1200px] mx-auto px-5 h-16 pt-4 lg:h-28 lg:pt-0 flex items-center justify-center lg:justify-between">
+            <Image
+              src="/logos/next-level-logo-mobile.png"
+              alt="Next Level"
+              width={520}
+              height={173}
+              className="block lg:hidden h-11 w-auto"
+              priority
+            />
             <Image 
               src="/logos/next-level-logo.svg" 
               alt="Next Level"
               width={180}
               height={56}
-              className="h-10 sm:h-12 lg:h-14 w-auto"
+              className="hidden lg:block h-10 sm:h-12 lg:h-14 w-auto"
               priority
             />
             {/* CTA desktop uniquement */}
@@ -178,16 +187,17 @@ export default function Hero() {
               initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.2 }}
               className="relative w-full">
-              <Image src="/images/hero/hero_nextlevel-V1.png" alt="Next Level — Agence web"
-                width={800} height={600}
+              <Image src="/images/hero/hero_nextlevel-V1-mobile.png" alt="Next Level — Agence web"
+                width={960} height={720}
                 className="w-full object-top"
+                sizes="100vw"
                 style={{ maxHeight: "340px", objectFit: "contain" }}
                 priority />
             </motion.div>
 
             {/* CTA dans la zone gradient */}
             <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.4, delay: 0.3 }} className="px-5 pt-4 pb-6">
+              transition={{ duration: 0.4, delay: 0.3 }} className="hidden sm:block px-5 pt-4 pb-6">
               <CTAButton onClick={openPopup} className="
                 w-full flex items-center justify-center gap-2
                 bg-gradient-brand text-white font-bold text-base
@@ -238,12 +248,9 @@ export default function Hero() {
       </div>
 
       {/* ── STICKY BOTTOM CTA (mobile) ── */}
-      <div className="fixed bottom-0 left-0 right-0 z-40 bg-[#1A1A2E] border-t border-white/5 px-4 py-3 flex items-center justify-between gap-3 sm:hidden">
-        <div className="leading-tight">
-          <p className="text-white text-[13px] font-bold">Discutons de votre projet</p>
-          <p className="text-white/50 text-[11px]">On vous répond sous 24h</p>
-        </div>
-        <CTAButton onClick={openPopup} className="flex-shrink-0 bg-gradient-brand text-white text-xs font-bold px-4 py-2.5 rounded-full shadow-brand hover:opacity-90 transition-opacity">
+      <div className="mobile-sticky-cta fixed bottom-0 left-0 z-40 bg-[#1A1A2E] border-t border-white/5 px-4 py-2 flex items-center justify-between gap-3 sm:hidden">
+        <p className="min-w-0 truncate text-white text-[13px] font-bold leading-none">Discutons de votre projet</p>
+        <CTAButton onClick={openPopup} className="flex-shrink-0 whitespace-nowrap bg-gradient-brand text-white text-xs font-bold px-4 py-2 rounded-full shadow-brand hover:opacity-90 transition-opacity">
           Prendre RDV →
         </CTAButton>
       </div>

@@ -5,7 +5,7 @@ import Image from "next/image";
 import GradientWaveText from "@/components/ui/gradient-wave-text";
 
 type Project =
-  | { title: string; category: string; description: string; result: string; video: string; image?: never }
+  | { title: string; category: string; description: string; result: string; video: string; poster: string; image?: never }
   | { title: string; category: string; description: string; result: string; image: string; video?: never };
 
 const PROJECTS: Project[] = [
@@ -14,6 +14,7 @@ const PROJECTS: Project[] = [
         category: "Identité & Positionnement",
         description: "Clarifier leur vision, définir un nouveau positionnement et guider une transformation significative.",
         video: "/videos/ocitocine.mp4",
+        poster: "/videos/ocitocine-poster.jpg",
         result: "Refonte complète",
     },
     {
@@ -21,6 +22,7 @@ const PROJECTS: Project[] = [
         category: "Refonte & Performance",
         description: "Refonte complète de l'identité digitale. Site repensé de zéro pour maximiser la visibilité et transformer chaque visite en opportunité commerciale.",
         video: "/videos/sompower.mp4",
+        poster: "/videos/sompower-poster.jpg",
         result: "+80% de trafic",
     },
     {
@@ -28,6 +30,7 @@ const PROJECTS: Project[] = [
         category: "Site Vitrine",
         description: "Refonte du site d'une agence d'architecture d'intérieur. Identité visuelle forte, galerie projets immersive et tunnel de prise de contact optimisé.",
         video: "/videos/archidomo.mp4",
+        poster: "/videos/archidomo-poster.jpg",
         result: "+60% de demandes",
     },
 ];
@@ -42,6 +45,8 @@ function ProjectMedia({ project }: { project: Project }) {
                     muted
                     loop
                     playsInline
+                    preload="auto"
+                    poster={project.poster}
                     className="object-cover w-full h-full"
                 />
             </div>

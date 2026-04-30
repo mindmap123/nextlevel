@@ -176,6 +176,7 @@ export default function AnimatedGradient({
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
   const frameIdRef = useRef<number | undefined>(undefined);
+  const hiddenFrameTimeoutRef = useRef<number | undefined>(undefined);
   const startTimeRef = useRef<number>(0);
   const [isMounted, setIsMounted] = useState(false);
 
@@ -270,7 +271,7 @@ export default function AnimatedGradient({
     const resize = () => {
       const width = container.clientWidth;
       const height = container.clientHeight;
-      const pixelRatio = window.devicePixelRatio || 1;
+      const pixelRatio = Math.min(window.devicePixelRatio || 1, 1.5);
       canvas.width = width * pixelRatio;
       canvas.height = height * pixelRatio;
       canvas.style.width = `${width}px`;
@@ -284,7 +285,9 @@ export default function AnimatedGradient({
 
     startTimeRef.current = performance.now();
 
-    const animate = (time: number) => {
+    const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+    const renderFrame = (time: number) => {
       const elapsed = (time - startTimeRef.current) / 1000;
       const speed = (params.speed / 100) * 5;
 
@@ -313,13 +316,28 @@ export default function AnimatedGradient({
       );
 
       gl.drawArrays(gl.TRIANGLES, 0, 6);
+    };
+
+    const animate = (time: number) => {
+      renderFrame(time);
+      if (document.hidden) {
+        hiddenFrameTimeoutRef.current = window.setTimeout(() => {
+          frameIdRef.current = requestAnimationFrame(animate);
+        }, 250);
+        return;
+      }
       frameIdRef.current = requestAnimationFrame(animate);
     };
 
-    frameIdRef.current = requestAnimationFrame(animate);
+    if (prefersReducedMotion) {
+      renderFrame(performance.now());
+    } else {
+      frameIdRef.current = requestAnimationFrame(animate);
+    }
 
     return () => {
       if (frameIdRef.current !== undefined) cancelAnimationFrame(frameIdRef.current);
+      if (hiddenFrameTimeoutRef.current !== undefined) clearTimeout(hiddenFrameTimeoutRef.current);
       resizeObserver.disconnect();
       gl.deleteProgram(program);
       gl.deleteShader(vertexShader);

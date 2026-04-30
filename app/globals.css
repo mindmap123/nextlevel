@@ -40,12 +40,14 @@
     margin: 0;
     padding: 0;
     height: 100%;
+    overflow-x: hidden;
   }
 
   body {
     background-color: var(--background);
     color: var(--foreground);
     font-family: var(--font-body);
+    min-height: 100dvh;
   }
 
   h1, h2, h3, h4, h5, h6 {
@@ -87,6 +89,20 @@
     box-shadow: 0 8px 40px -8px rgba(123, 47, 242, 0.3);
   }
 
+  .mobile-sticky-cta {
+    right: auto;
+    width: 100vw;
+    max-width: 100%;
+    padding-bottom: calc(0.75rem + env(safe-area-inset-bottom));
+  }
+
+  .mobile-ambient-gradient {
+    background:
+      radial-gradient(circle at 10% 82%, rgba(123, 47, 242, 0.2), transparent 34%),
+      linear-gradient(150deg, rgba(237, 228, 255, 0.95) 0%, rgba(248, 249, 252, 0.86) 48%, rgba(107, 170, 255, 0.32) 100%);
+    pointer-events: none;
+  }
+
   /* Glass effect for cards */
   .glass {
     backdrop-filter: blur(20px);
@@ -117,6 +133,12 @@
   .animate-float,
   .animate-pulse-soft {
     animation: none !important;
+  }
+}
+
+@media (max-width: 639px) {
+  html {
+    background-color: #1A1A2E;
   }
 }
 
