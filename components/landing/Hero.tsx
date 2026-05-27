@@ -2,47 +2,110 @@
 
 import { motion } from "framer-motion";
 import Image from "next/image";
-import { ArrowRight, Rocket, Star, Clock, TrendingUp } from "lucide-react";
+import { ArrowRight, ArrowUpRight } from "lucide-react";
 import { usePopup } from "./PopupContext";
 import CTAButton from "@/components/ui/CTAButton";
+import GradientWaveText from "@/components/ui/gradient-wave-text";
 import AnimatedGradient from "@/components/ui/animated-gradient";
-import GradientWaveText from "@/components/ui/gradient-wave-text"
-;
-
-const STATS = [
-  { num: "+80", label: "projets livrés", icon: Rocket },
-  { num: "4.9/5", label: "note clients", icon: Star },
-  { num: "7j", label: "délai moyen", icon: Clock },
-  { num: "+40%", label: "conversion moy.", icon: TrendingUp },
-];
 
 const CLIENTS = [
   "Kimbrandesign", "Sompower", "Archidomo",
   "Iberdrola", "Francecanapé", "Arnaud Energies", "22h22", "Wegoboard", "L'atelier", "Griph",
 ];
 
+const WORD_EASE = [0.22, 1, 0.36, 1] as const;
+
+function WordRevealLine({
+  text,
+  emphasis = false,
+  lineDelay = 0,
+}: {
+  text: string;
+  emphasis?: boolean;
+  lineDelay?: number;
+}) {
+  const words = text.split(" ");
+  return (
+    <span className="block">
+      {words.map((w, i) => (
+        <span
+          key={i}
+          className="inline-block overflow-hidden align-bottom mr-[0.22em] last:mr-0"
+          style={{ paddingBottom: "0.12em" }}
+        >
+          <motion.span
+            initial={{ y: "110%" }}
+            animate={{ y: 0 }}
+            transition={{ duration: 0.6, delay: lineDelay + i * 0.08, ease: WORD_EASE }}
+            className={`inline-block ${emphasis ? "text-gradient" : ""}`}
+          >
+            {w}
+          </motion.span>
+        </span>
+      ))}
+    </span>
+  );
+}
+
 export default function Hero() {
   const { openPopup } = usePopup();
 
   return (
     <>
-      <div className="relative bg-white">
-        <div className="mobile-ambient-gradient absolute inset-0 z-0 sm:hidden" />
-        <AnimatedGradient
-          config={{
-            preset: "custom",
-            color1: "#EDE4FF", color2: "#9B6FFF", color3: "#6BAAFF",
-            rotation: 15, proportion: 38, scale: 0.3, speed: 35,
-            distortion: 3, swirl: 40, swirlIterations: 6,
-            softness: 100, offset: 0, shape: "Checks", shapeSize: 40,
+      <div className="relative overflow-hidden bg-[#1A1A2E] lg:bg-[#08050D] text-white">
+        {/* Mobile : même bg que footer (AnimatedGradient sur #1A1A2E) */}
+        <div aria-hidden className="absolute inset-0 z-0 overflow-hidden lg:hidden">
+          <AnimatedGradient
+            config={{
+              preset: "custom",
+              color1: "#0D0D1A",
+              color2: "#7B2FF2",
+              color3: "#0066FF",
+              rotation: -20,
+              proportion: 30,
+              scale: 0.3,
+              speed: 35,
+              distortion: 3,
+              swirl: 40,
+              swirlIterations: 6,
+              softness: 100,
+              offset: 0,
+              shape: "Checks",
+              shapeSize: 40,
+            }}
+            style={{ opacity: 0.55 }}
+          />
+        </div>
+        {/* Desktop : aurores brand en mouvement */}
+        <div aria-hidden className="pointer-events-none absolute inset-0 z-0 overflow-hidden hidden lg:block">
+          <div
+            className="hero-aurora hero-aurora--violet"
+            style={{ top: "-12%", left: "30%", width: "60vw", height: "60vw" }}
+          />
+          <div
+            className="hero-aurora hero-aurora--blue"
+            style={{ top: "10%", left: "-10%", width: "55vw", height: "55vw" }}
+          />
+          <div
+            className="hero-aurora hero-aurora--lilac"
+            style={{ top: "20%", right: "-15%", width: "50vw", height: "50vw" }}
+          />
+        </div>
+        {/* Grain subtil desktop */}
+        <div
+          aria-hidden
+          className="pointer-events-none absolute inset-0 z-0 opacity-[0.05] mix-blend-overlay hidden lg:block"
+          style={{
+            backgroundImage:
+              "radial-gradient(rgba(255,255,255,0.6) 1px, transparent 1px)",
+            backgroundSize: "3px 3px",
           }}
-          style={{ opacity: 0.55 }}
-          className="hidden sm:block fixed inset-0 w-full h-full z-0"
         />
+        <div className="absolute inset-0 z-0 bg-[linear-gradient(180deg,rgba(8,5,13,0.50)_0%,rgba(8,5,13,0.78)_100%)] hidden lg:block" />
 
         {/* ── NAV ── */}
-        <nav className="sticky top-0 z-50 bg-transparent">
-          <div className="max-w-[1200px] mx-auto px-5 h-16 pt-4 lg:h-28 lg:pt-0 flex items-center justify-center lg:justify-between">
+        <nav className="sticky top-0 z-50 bg-transparent lg:absolute lg:inset-x-0">
+          <div className="max-w-[1200px] mx-auto px-5 h-16 pt-4 lg:h-24 lg:pt-0 flex items-center justify-center lg:justify-between">
             <Image
               src="/logos/next-level-logo-mobile.png"
               alt="Next Level"
@@ -61,11 +124,12 @@ export default function Hero() {
             />
             {/* CTA desktop uniquement */}
             <CTAButton onClick={openPopup} className="
-              hidden lg:inline-flex items-center gap-2
-              bg-gradient-brand text-white font-bold text-sm
-              px-5 py-2.5 rounded-xl shadow-brand
+              hidden lg:inline-flex items-center justify-center gap-2
+              border border-white/20 bg-white/[0.06] text-white/85 font-bold text-sm
+              px-5 py-3 rounded-full backdrop-blur-sm
               hover:opacity-95 hover:-translate-y-0.5 transition-all duration-200">
-              Prendre RDV <ArrowRight className="w-4 h-4" />
+              Contact
+              <ArrowRight className="w-4 h-4" />
             </CTAButton>
           </div>
         </nav>
@@ -73,156 +137,134 @@ export default function Hero() {
         {/* ── HERO ── */}
         <section className="relative overflow-hidden">
 
-          {/* Desktop : 2 colonnes côte à côte */}
-          <div className="hidden lg:grid lg:grid-cols-[1fr_1.35fr] max-w-[1340px] mx-auto pl-10 pr-0 pt-10 pb-0 relative z-10 items-center gap-0">
+          {/* Desktop : colonne unique centrée — occupe le viewport entier */}
+          <div className="hidden lg:flex flex-col items-center justify-center max-w-[1080px] mx-auto px-5 pt-24 pb-16 relative z-10 text-center min-h-screen">
 
-            {/* Colonne gauche */}
-            <div className="pb-14 pr-8">
-              <motion.div initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.4 }}>
-                <div className="inline-flex items-center gap-2 bg-[#F0E8FF] text-[#7B2FF2] border border-[#7B2FF2]/20 rounded-full px-3.5 py-1.5 text-xs font-bold mb-6">
-                  <span className="w-1.5 h-1.5 rounded-full bg-[#7B2FF2] animate-pulse" />
-                  Votre partenaire digital sur mesure
-                </div>
-              </motion.div>
+            <motion.div initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.4 }}>
+              <div className="inline-flex items-center gap-2 bg-white/[0.06] text-[#EAD7FF] border border-white/15 rounded-full px-4 py-1.5 text-xs font-bold mb-8 backdrop-blur-sm uppercase tracking-[0.08em]">
+                <span className="w-1.5 h-1.5 rounded-full bg-[#C02AE8]" />
+                Votre partenaire digital sur mesure
+              </div>
+            </motion.div>
 
-              <motion.h1
-                initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: 0.05 }}
-                className="font-display font-bold tracking-[-0.04em] leading-[1.02] text-[58px] xl:text-[72px] text-[#1A1A2E] mb-5"
-              >
-                On vous trouve.
-                <br />
-                <em className="not-italic text-gradient">On vous choisit.</em>
-              </motion.h1>
+            <h1 className="font-body font-medium tracking-[-0.045em] leading-[1.05] text-[88px] text-[#FFF9FF] mb-8">
+              <WordRevealLine text="On vous trouve." lineDelay={0.1} />
+              <span className="block">
+                <em className="not-italic inline-block relative pb-3">
+                  <WordRevealLine text="On vous choisit." emphasis lineDelay={0.34} />
+                  <motion.span
+                    initial={{ scaleX: 0 }}
+                    animate={{ scaleX: 1 }}
+                    transition={{ duration: 0.7, delay: 1.05, ease: [0.65, 0, 0.35, 1] }}
+                    style={{ transformOrigin: "left center" }}
+                    aria-hidden
+                    className="absolute left-0 bottom-0 h-[3px] w-full rounded-full bg-gradient-brand"
+                  />
+                </em>
+              </span>
+            </h1>
 
-              <motion.div initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: 0.1 }}
-                className="max-w-[420px] mb-8"
-                style={{ "--gradient-wave-base": "rgb(100,116,139)" } as React.CSSProperties}
-              >
-                <GradientWaveText align="left" inView repeat speed={0.18} bandGap={10} bandCount={4}
-                  customColors={["#7B2FF2", "#9B6FFF", "#0066FF", "#6BAAFF"]}
-                  className="text-lg leading-relaxed">
-                  Plus de visibilité, plus de clients.
-                </GradientWaveText>
-              </motion.div>
+            <motion.div initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.1 }}
+              className="max-w-[560px] mb-12"
+              style={{ "--gradient-wave-base": "rgba(255,255,255,0.72)" } as React.CSSProperties}
+            >
+              <GradientWaveText align="center" inView repeat speed={0.18} bandGap={10} bandCount={4}
+                customColors={["#7B2FF2", "#9B6FFF", "#0066FF", "#6BAAFF"]}
+                className="text-xl leading-relaxed">
+                Plus de visibilité, plus de clients.
+              </GradientWaveText>
+            </motion.div>
 
-              <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.4, delay: 0.15 }} className="mb-10">
-                <CTAButton onClick={openPopup} className="
-                  inline-flex items-center gap-2.5
-                  bg-gradient-brand text-white font-bold text-lg
-                  px-7 py-4 rounded-xl shadow-brand
-                  hover:shadow-brand-lg hover:opacity-95 hover:-translate-y-0.5
-                  transition-all duration-200">
-                  Prendre RDV <ArrowRight className="w-5 h-5" />
-                </CTAButton>
-              </motion.div>
+            <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.4, delay: 0.15 }} className="mb-14">
+              <CTAButton onClick={openPopup} className="
+                group relative inline-flex items-center justify-center gap-2.5
+                bg-gradient-brand text-white font-bold text-base
+                px-7 py-4 rounded-full
+                ring-1 ring-white/15
+                shadow-[0_10px_40px_-10px_rgba(123,47,242,0.55),0_0_0_1px_rgba(255,255,255,0.08)_inset]
+                hover:-translate-y-0.5 hover:shadow-[0_18px_52px_-10px_rgba(123,47,242,0.75),0_0_0_1px_rgba(255,255,255,0.12)_inset]
+                transition-all duration-200">
+                <span className="relative">Prendre RDV</span>
+                <ArrowUpRight className="w-[18px] h-[18px] transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" strokeWidth={2.25} />
+              </CTAButton>
+            </motion.div>
 
-              {/* Stats en ligne horizontale */}
-              <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }}
-                transition={{ duration: 0.5, delay: 0.25 }}
-                className="grid grid-cols-4 gap-3">
-                {STATS.map((s, i) => (
-                  <motion.div key={s.label}
-                    initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.4, delay: 0.3 + i * 0.08 }}
-                    className="bg-white/80 backdrop-blur-sm border border-[#E2E8F0] rounded-xl px-3 py-3 hover:border-[#7B2FF2]/30 hover:shadow-sm transition-all duration-300">
-                    <s.icon className="w-3.5 h-3.5 text-[#7B2FF2] mb-1.5" />
-                    <div className="font-display text-xl xl:text-2xl font-bold tracking-tight leading-none text-gradient">{s.num}</div>
-                    <div className="text-[11px] text-[#64748B] mt-1 font-medium leading-tight">{s.label}</div>
-                  </motion.div>
-                ))}
-              </motion.div>
-            </div>
-
-            {/* Colonne droite — image pleine hauteur */}
             <motion.div
-              initial={{ opacity: 0, x: 30 }} animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.7, delay: 0.2, ease: "easeOut" }}
-              className="relative self-stretch flex items-center justify-end">
-              <Image src="/images/hero/hero_nextlevel-V1.png" alt="Next Level — Agence web"
-                width={900} height={800}
-                className="w-full h-auto max-h-[600px] xl:max-h-[700px] object-contain"
-                priority />
+              initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.25 }}
+              className="flex flex-wrap items-center justify-center gap-3"
+              aria-hidden
+            >
+              <div className="inline-flex items-center gap-2 rounded-full border border-white/12 bg-white/[0.05] px-5 py-2.5 text-sm text-[#EAD7FF] backdrop-blur-sm">
+                <span className="text-[#B600FF]">✦</span>
+                Sites sur mesure
+              </div>
+              <div className="inline-flex items-center gap-2 rounded-full border border-white/12 bg-white/[0.05] px-5 py-2.5 text-sm text-[#EAD7FF] backdrop-blur-sm">
+                <span className="text-[#B600FF]">✓</span>
+                Leads qualifiés
+              </div>
+              <div className="inline-flex items-center gap-2 rounded-full border border-white/12 bg-white/[0.05] px-5 py-2.5 text-sm text-[#EAD7FF] backdrop-blur-sm">
+                <span className="text-[#B600FF]">↗</span>
+                Conversion optimisée
+              </div>
             </motion.div>
           </div>
 
-          {/* Mobile : colonne unique */}
+          {/* Mobile : colonne unique — remplit viewport sous le nav */}
           <div className="lg:hidden relative z-10">
-            <div className="px-5 pt-3 pb-6">
+            <div className="px-5 pt-6 pb-20 text-center flex flex-col items-center justify-center min-h-[calc(100svh-64px)]">
               <motion.div initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.4 }}>
-                <div className="inline-flex items-center gap-2 bg-[#F0E8FF] text-[#7B2FF2] border border-[#7B2FF2]/20 rounded-full px-3.5 py-1.5 text-xs font-bold mb-5">
-                  <span className="w-1.5 h-1.5 rounded-full bg-[#7B2FF2] animate-pulse" />
+                <div className="inline-flex items-center gap-2 bg-white/10 text-[#F1D9FF] border border-white/15 rounded-full px-3.5 py-1.5 text-xs font-bold mb-6 backdrop-blur-sm">
+                  <span className="w-1.5 h-1.5 rounded-full bg-[#C02AE8] animate-pulse" />
                   Votre partenaire digital sur mesure
                 </div>
               </motion.div>
 
-              <motion.h1
-                initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: 0.05 }}
-                className="font-display font-bold tracking-[-0.04em] leading-[1.02] text-[40px] sm:text-[52px] text-[#1A1A2E] mb-4"
-              >
-                On vous trouve.
-                <br />
-                <em className="not-italic text-gradient">On vous choisit.</em>
-              </motion.h1>
+              <h1 className="font-body font-medium tracking-[-0.045em] leading-[1.08] text-[44px] sm:text-[58px] text-[#FFF9FF] mb-6 drop-shadow-[0_2px_18px_rgba(0,0,0,0.36)]">
+                <WordRevealLine text="On vous trouve." lineDelay={0.1} />
+                <span className="block">
+                  <em className="not-italic inline-block relative pb-2">
+                    <WordRevealLine text="On vous choisit." emphasis lineDelay={0.34} />
+                    <motion.span
+                      initial={{ scaleX: 0 }}
+                      animate={{ scaleX: 1 }}
+                      transition={{ duration: 0.7, delay: 1.05, ease: [0.65, 0, 0.35, 1] }}
+                      style={{ transformOrigin: "left center" }}
+                      aria-hidden
+                      className="absolute left-0 bottom-0 h-[2.5px] w-full rounded-full bg-gradient-brand"
+                    />
+                  </em>
+                </span>
+              </h1>
 
               <motion.div initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: 0.1 }}
-                className="mb-6"
-                style={{ "--gradient-wave-base": "rgb(100,116,139)" } as React.CSSProperties}
+                className="mb-8 max-w-[420px]"
+                style={{ "--gradient-wave-base": "rgba(255,255,255,0.66)" } as React.CSSProperties}
               >
-                <GradientWaveText align="left" inView repeat speed={0.18} bandGap={10} bandCount={4}
+                <GradientWaveText align="center" inView repeat speed={0.18} bandGap={10} bandCount={4}
                   customColors={["#7B2FF2", "#9B6FFF", "#0066FF", "#6BAAFF"]}
                   className="text-base leading-relaxed">
                   Plus de visibilité, plus de clients.
                 </GradientWaveText>
               </motion.div>
 
-            </div>
-
-            {/* Image pleine largeur mobile */}
-            <motion.div
-              initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.2 }}
-              className="relative w-full">
-              <Image src="/images/hero/hero_nextlevel-V1-mobile.png" alt="Next Level — Agence web"
-                width={960} height={720}
-                className="w-full object-top"
-                sizes="100vw"
-                style={{ maxHeight: "340px", objectFit: "contain" }}
-                priority />
-            </motion.div>
-
-            {/* CTA dans la zone gradient */}
-            <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.4, delay: 0.3 }} className="hidden sm:block px-5 pt-4 pb-6">
-              <CTAButton onClick={openPopup} className="
-                w-full flex items-center justify-center gap-2
-                bg-gradient-brand text-white font-bold text-base
-                px-6 py-3.5 rounded-xl shadow-brand
-                hover:opacity-95 transition-all duration-200">
-                Prendre RDV <ArrowRight className="w-4 h-4" />
-              </CTAButton>
-            </motion.div>
-
-            {/* Stats */}
-            <div className="bg-[#F8F9FC] px-5 pt-4 pb-6">
-              <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }}
-                transition={{ duration: 0.5, delay: 0.35 }}
-                className="grid grid-cols-2 gap-3">
-                {STATS.map((s, i) => (
-                  <motion.div key={s.label}
-                    initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.4, delay: 0.4 + i * 0.08 }}
-                    className="bg-white border border-[#E2E8F0] rounded-xl px-4 py-3.5">
-                    <s.icon className="w-3.5 h-3.5 text-[#7B2FF2] mb-1.5" />
-                    <div className="font-display text-2xl font-bold tracking-tight leading-none text-gradient">{s.num}</div>
-                    <div className="text-xs text-[#64748B] mt-1.5 font-medium">{s.label}</div>
-                  </motion.div>
-                ))}
+              <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.4, delay: 0.15 }} className="mb-8">
+                <CTAButton onClick={openPopup} className="
+                  group inline-flex items-center justify-center gap-2
+                  bg-gradient-brand text-white font-bold text-base
+                  px-6 py-3.5 rounded-full
+                  ring-1 ring-white/15
+                  shadow-[0_8px_32px_-8px_rgba(123,47,242,0.6),0_0_0_1px_rgba(255,255,255,0.08)_inset]
+                  hover:-translate-y-0.5 transition-all duration-200">
+                  Prendre RDV
+                  <ArrowUpRight className="h-[18px] w-[18px] transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" strokeWidth={2.25} />
+                </CTAButton>
               </motion.div>
+
             </div>
           </div>
 
@@ -234,14 +276,13 @@ export default function Hero() {
             <div className="relative overflow-hidden">
               <div className="flex gap-16 animate-infinite-scroll w-max py-1" style={{ willChange: "transform" }}>
                 {[...CLIENTS, ...CLIENTS, ...CLIENTS, ...CLIENTS].map((name, i) => (
-                  <span key={i} className="font-display text-2xl font-bold whitespace-nowrap select-none"
-                    style={{ color: "#1A1A2E", opacity: 0.35, letterSpacing: "-0.03em" }}>
+                  <span key={i} className="font-display text-2xl font-bold whitespace-nowrap select-none text-[#1A1A2E]/35"
+                    style={{ letterSpacing: "-0.03em" }}>
                     {name}
                   </span>
                 ))}
               </div>
-              <div className="absolute inset-0 pointer-events-none"
-                style={{ background: "linear-gradient(90deg, #F8F9FC 0%, transparent 15%, transparent 85%, #F8F9FC 100%)" }} />
+              <div className="hero-logo-strip-mask absolute inset-0 pointer-events-none" />
             </div>
           </div>
         </section>

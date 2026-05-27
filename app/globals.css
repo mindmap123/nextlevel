@@ -89,6 +89,44 @@
     box-shadow: 0 8px 40px -8px rgba(123, 47, 242, 0.3);
   }
 
+  .hero-aurora {
+    position: absolute;
+    border-radius: 9999px;
+    filter: blur(90px);
+    will-change: transform, opacity;
+    pointer-events: none;
+    mix-blend-mode: screen;
+  }
+  .hero-aurora--violet {
+    background: radial-gradient(circle, rgba(123, 47, 242, 0.55) 0%, rgba(123, 47, 242, 0) 70%);
+    animation: heroAuroraDrift1 32s ease-in-out infinite;
+  }
+  .hero-aurora--blue {
+    background: radial-gradient(circle, rgba(0, 102, 255, 0.45) 0%, rgba(0, 102, 255, 0) 70%);
+    animation: heroAuroraDrift2 38s ease-in-out infinite;
+  }
+  .hero-aurora--lilac {
+    background: radial-gradient(circle, rgba(155, 111, 255, 0.40) 0%, rgba(155, 111, 255, 0) 70%);
+    animation: heroAuroraDrift3 26s ease-in-out infinite;
+  }
+  @keyframes heroAuroraDrift1 {
+    0%, 100% { transform: translate3d(-6%, -4%, 0) scale(1); }
+    50% { transform: translate3d(8%, 6%, 0) scale(1.08); }
+  }
+  @keyframes heroAuroraDrift2 {
+    0%, 100% { transform: translate3d(5%, 3%, 0) scale(1.05); }
+    50% { transform: translate3d(-9%, -5%, 0) scale(0.96); }
+  }
+  @keyframes heroAuroraDrift3 {
+    0%, 100% { transform: translate3d(0, 0, 0) scale(0.95); }
+    50% { transform: translate3d(-5%, 7%, 0) scale(1.10); }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .hero-aurora--violet,
+    .hero-aurora--blue,
+    .hero-aurora--lilac { animation: none; }
+  }
+
   .mobile-sticky-cta {
     right: auto;
     width: 100vw;
@@ -101,6 +139,16 @@
       radial-gradient(circle at 10% 82%, rgba(123, 47, 242, 0.2), transparent 34%),
       linear-gradient(150deg, rgba(237, 228, 255, 0.95) 0%, rgba(248, 249, 252, 0.86) 48%, rgba(107, 170, 255, 0.32) 100%);
     pointer-events: none;
+  }
+
+  .hero-logo-strip-mask {
+    background: linear-gradient(
+      90deg,
+      #F8F9FC 0%,
+      rgba(248, 249, 252, 0) 15%,
+      rgba(248, 249, 252, 0) 85%,
+      #F8F9FC 100%
+    );
   }
 
   /* Glass effect for cards */
