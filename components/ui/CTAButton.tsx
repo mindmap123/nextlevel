@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useCallback } from 'react';
+import { useState, useCallback, useRef } from 'react';
 import { useConfetti } from '@/lib/useConfetti';
 
 interface CTAButtonProps {
@@ -14,11 +14,11 @@ interface CTAButtonProps {
     rel?: string;
 }
 
-export default function CTAButton({ 
-    onClick, 
-    href, 
-    children, 
-    className = '', 
+export default function CTAButton({
+    onClick,
+    href,
+    children,
+    className = '',
     disabled = false,
     type = 'button',
     target,
@@ -26,16 +26,33 @@ export default function CTAButton({
 }: CTAButtonProps) {
     const { fireConfetti } = useConfetti();
     const [isClicked, setIsClicked] = useState(false);
+    const elRef = useRef<HTMLElement>(null);
+
+    const handleMove = useCallback((e: React.MouseEvent) => {
+        const el = elRef.current;
+        if (!el) return;
+        if (window.matchMedia("(pointer: coarse)").matches) return;
+        if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+        const r = el.getBoundingClientRect();
+        const x = e.clientX - r.left - r.width / 2;
+        const y = e.clientY - r.top - r.height / 2;
+        el.style.transform = `translate(${(x * 0.18).toFixed(2)}px, ${(y * 0.28).toFixed(2)}px)`;
+    }, []);
+
+    const handleLeave = useCallback(() => {
+        const el = elRef.current;
+        if (el) el.style.transform = "";
+    }, []);
 
     const handleClick = useCallback((e: React.MouseEvent) => {
         if (disabled || isClicked) return;
-        
+
         // Toujours empêcher le comportement par défaut pour ajouter le délai
         e.preventDefault();
-        
+
         setIsClicked(true);
         fireConfetti();
-        
+
         // Délai avant d'exécuter l'action
         setTimeout(() => {
             if (onClick) {
@@ -51,13 +68,16 @@ export default function CTAButton({
         }, 600);
     }, [disabled, isClicked, fireConfetti, onClick, href, target, rel]);
 
-    const baseClassName = `${className} ${isClicked ? 'pointer-events-none' : ''}`;
+    const baseClassName = `cta-magnetic ${className} ${isClicked ? 'pointer-events-none' : ''}`;
 
     if (href) {
         return (
             <a
+                ref={elRef as React.RefObject<HTMLAnchorElement>}
                 href={href}
                 onClick={handleClick}
+                onMouseMove={handleMove}
+                onMouseLeave={handleLeave}
                 className={baseClassName}
                 target={target}
                 rel={rel}
@@ -69,8 +89,11 @@ export default function CTAButton({
 
     return (
         <button
+            ref={elRef as React.RefObject<HTMLButtonElement>}
             type={type}
             onClick={handleClick}
+            onMouseMove={handleMove}
+            onMouseLeave={handleLeave}
             disabled={disabled}
             className={baseClassName}
         >
