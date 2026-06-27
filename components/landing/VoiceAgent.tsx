@@ -8,6 +8,7 @@ import {
 } from "lucide-react";
 import CountUp from "@/components/ui/CountUp";
 import RevealWords from "@/components/ui/RevealWords";
+import VoiceCallDemo from "./VoiceCallDemo";
 
 const DEMO_URL = "https://voicecaptur.vercel.app/";
 
@@ -18,26 +19,6 @@ const PIPELINE = [
 ];
 
 const VOICES = ["Clara", "Inès", "Hugo", "Léo"];
-
-function Waveform() {
-  const bars = Array.from({ length: 24 });
-  return (
-    <div className="flex items-center justify-center gap-[3px] h-10">
-      {bars.map((_, i) => (
-        <span
-          key={i}
-          className="wave-bar w-[3px] rounded-full bg-accent"
-          style={{
-            height: "100%",
-            animationDelay: `${(i % 7) * 0.12}s`,
-            animationDuration: `${0.8 + (i % 5) * 0.12}s`,
-            opacity: 0.5 + (i % 4) * 0.15,
-          }}
-        />
-      ))}
-    </div>
-  );
-}
 
 export default function VoiceAgent() {
   return (
@@ -124,64 +105,8 @@ export default function VoiceAgent() {
             </div>
           </motion.div>
 
-          {/* Mockup d'appel animé */}
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.1 }}
-            className="relative bg-card border rule rounded-3xl p-7 md:p-8 animate-floaty shadow-[0_30px_80px_-40px_rgba(0,0,0,0.8)]"
-          >
-            <div className="flex items-center justify-between mb-7">
-              <span className="inline-flex items-center gap-2 text-sm font-semibold text-cream">
-                <span className="relative flex w-2.5 h-2.5">
-                  <span className="pulse-ring absolute inline-flex w-full h-full rounded-full bg-accent" />
-                  <span className="relative inline-flex w-2.5 h-2.5 rounded-full bg-accent animate-blink" />
-                </span>
-                En appel
-              </span>
-              <span className="text-sm text-ash-dim tabular-nums">0:11</span>
-            </div>
-
-            <div className="flex items-center gap-3 mb-5">
-              <div className="w-11 h-11 rounded-full bg-accent/15 text-accent flex items-center justify-center">
-                <PhoneCall className="w-5 h-5" />
-              </div>
-              <div>
-                <p className="font-display font-bold text-cream leading-tight">Agent Immo</p>
-                <p className="text-xs text-ash-dim">Duval Immobilier</p>
-              </div>
-            </div>
-
-            <motion.div
-              initial={{ opacity: 0, y: 8 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: 0.4 }}
-              className="bg-night border rule rounded-2xl rounded-tl-sm p-4 mb-4"
-            >
-              <p className="text-cream text-[15px] leading-relaxed">
-                Bonjour, agence Duval Immobilier, que puis-je faire pour vous&nbsp;?
-              </p>
-            </motion.div>
-
-            <Waveform />
-
-            {/* Carte résultat qui "tombe" */}
-            <motion.div
-              initial={{ opacity: 0, y: 14 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: 0.7 }}
-              className="mt-5 bg-accent/10 border border-accent/30 rounded-2xl p-4 flex items-center gap-3"
-            >
-              <CalendarCheck className="w-5 h-5 text-accent shrink-0" />
-              <div>
-                <p className="text-cream text-sm font-bold">RDV pris · demain 9h00</p>
-                <p className="text-ash-dim text-xs">Lead qualifié · résumé envoyé au CRM</p>
-              </div>
-            </motion.div>
-          </motion.div>
+          {/* Démo d'appel jouable */}
+          <VoiceCallDemo />
         </div>
 
         {/* ── Résultats + voix + CTA ── */}
