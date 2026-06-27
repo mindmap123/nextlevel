@@ -228,6 +228,44 @@
   50% { transform: translate3d(-5%, 7%, 0) scale(1.10); }
 }
 
+/* Tilt 3D — cartes réalisations réactives au curseur */
+.tilt-card {
+  transform: perspective(900px) rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg));
+  transform-style: preserve-3d;
+  transition: transform 0.18s ease, box-shadow 0.3s ease;
+  will-change: transform;
+}
+.tilt-card:hover {
+  box-shadow: 0 30px 60px -20px rgba(0, 0, 0, 0.6),
+              0 0 0 1px rgba(255, 77, 23, 0.25);
+}
+.tilt-card > video,
+.tilt-card > img {
+  transition: transform 0.4s ease;
+}
+.tilt-card:hover > video,
+.tilt-card:hover > img {
+  transform: scale(1.04);
+}
+.tilt-sheen {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  background: radial-gradient(
+    340px circle at var(--gx, 50%) var(--gy, 50%),
+    rgba(255, 122, 60, 0.18),
+    transparent 60%
+  );
+  mix-blend-mode: screen;
+}
+.tilt-card:hover .tilt-sheen { opacity: 1; }
+
+@media (pointer: coarse) {
+  .tilt-card { transform: none; }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .animate-marquee,
   .wave-bar,
@@ -237,6 +275,9 @@
   .hero-aurora--1,
   .hero-aurora--2,
   .hero-aurora--3 { animation: none; }
+  .tilt-card { transform: none; transition: none; }
+  .tilt-card:hover > video,
+  .tilt-card:hover > img { transform: none; }
 }
 
 @media (max-width: 639px) {

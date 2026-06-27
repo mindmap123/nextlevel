@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import Image from "next/image";
+import { useRef } from "react";
 
 type Project = {
   title: string;
@@ -45,25 +46,52 @@ const PROJECTS: Project[] = [
 ];
 
 function ProjectMedia({ project }: { project: Project }) {
-  if (project.video) {
-    return (
-      <div className="aspect-[16/10] bg-card overflow-hidden relative rounded-xl border rule">
-        <video
-          src={project.video}
-          autoPlay
-          muted
-          loop
-          playsInline
-          preload="auto"
-          poster={project.poster}
-          className="object-cover w-full h-full"
-        />
-      </div>
-    );
-  }
+  const wrapRef = useRef<HTMLDivElement>(null);
+
+  const handleMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    const el = wrapRef.current;
+    if (!el) return;
+    if (window.matchMedia("(pointer: coarse)").matches) return;
+    const r = el.getBoundingClientRect();
+    const px = (e.clientX - r.left) / r.width - 0.5;
+    const py = (e.clientY - r.top) / r.height - 0.5;
+    el.style.setProperty("--rx", `${(-py * 7).toFixed(2)}deg`);
+    el.style.setProperty("--ry", `${(px * 9).toFixed(2)}deg`);
+    el.style.setProperty("--gx", `${((px + 0.5) * 100).toFixed(1)}%`);
+    el.style.setProperty("--gy", `${((py + 0.5) * 100).toFixed(1)}%`);
+  };
+
+  const handleLeave = () => {
+    const el = wrapRef.current;
+    if (!el) return;
+    el.style.setProperty("--rx", "0deg");
+    el.style.setProperty("--ry", "0deg");
+  };
+
+  const inner = project.video ? (
+    <video
+      src={project.video}
+      autoPlay
+      muted
+      loop
+      playsInline
+      preload="auto"
+      poster={project.poster}
+      className="object-cover w-full h-full"
+    />
+  ) : (
+    <Image src={project.image!} alt={project.title} width={800} height={500} className="object-cover w-full h-full" />
+  );
+
   return (
-    <div className="aspect-[16/10] bg-card overflow-hidden relative rounded-xl border rule">
-      <Image src={project.image!} alt={project.title} width={800} height={500} className="object-cover w-full h-full" />
+    <div
+      ref={wrapRef}
+      onMouseMove={handleMove}
+      onMouseLeave={handleLeave}
+      className="tilt-card aspect-[16/10] bg-card overflow-hidden relative rounded-xl border rule"
+    >
+      {inner}
+      <span aria-hidden className="tilt-sheen" />
     </div>
   );
 }
