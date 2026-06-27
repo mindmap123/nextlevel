@@ -257,7 +257,7 @@
 
 /* CTA magnétique — suit légèrement le curseur + lueur au hover */
 .cta-magnetic {
-  transition: transform 0.25s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.25s ease, filter 0.25s ease;
+  transition: transform 0.35s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.25s ease, filter 0.25s ease;
   will-change: transform;
 }
 .cta-magnetic:hover {

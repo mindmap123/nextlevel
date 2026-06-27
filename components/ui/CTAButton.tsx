@@ -36,7 +36,10 @@ export default function CTAButton({
         const r = el.getBoundingClientRect();
         const x = e.clientX - r.left - r.width / 2;
         const y = e.clientY - r.top - r.height / 2;
-        el.style.transform = `translate(${(x * 0.18).toFixed(2)}px, ${(y * 0.28).toFixed(2)}px)`;
+        const clamp = (v: number, max: number) => Math.max(-max, Math.min(max, v));
+        const tx = clamp(x * 0.1, 7);
+        const ty = clamp(y * 0.14, 7);
+        el.style.transform = `translate(${tx.toFixed(2)}px, ${ty.toFixed(2)}px)`;
     }, []);
 
     const handleLeave = useCallback(() => {
