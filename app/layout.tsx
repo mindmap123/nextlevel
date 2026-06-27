@@ -18,6 +18,15 @@ const plusJakartaSans = Plus_Jakarta_Sans({
 export const metadata = {
   title: 'Next Level | Votre site en 7 jours, pas en 3 mois',
   description: 'Agence web française. Sites haute-conversion, SEO local et outils métier sur mesure, livrés en 7 jours. Audit honnête et gratuit.',
+  icons: {
+    icon: [
+      { url: '/favicon.ico', sizes: 'any' },
+      { url: '/favicon-32.png', type: 'image/png', sizes: '32x32' },
+      { url: '/favicon-16.png', type: 'image/png', sizes: '16x16' },
+      { url: '/icon.svg', type: 'image/svg+xml' },
+    ],
+    apple: '/apple-touch-icon.png',
+  },
 };
 
 export default function RootLayout({

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" width="1024" height="1024" role="img" aria-label="Next.Level">
+  <title>Next.Level</title>
+  <rect width="1024" height="1024" fill="#12130D"/>
+  <g transform="translate(100.68 161.19) scale(0.5847)">
+    <path d="M73 930V270H261L560 737H571L562 270H702V930H532L216 441H205L214 930Z" fill="#F7F4EC"/>
+    <path d="M806.0 943Q759.0 943 735.5 923.0Q712.0 903 712.0 861Q712.0 818 735.5 798.0Q759.0 778 806.0 778Q854.0 778 877.5 798.0Q901.0 818 901.0 861Q901.0 943 806.0 943Z" fill="#FF4D17"/>
+    <path d="M911.0 930V270H1055.0V930ZM941.0 930V809H1334.0V930Z" fill="#F7F4EC"/>
+  </g>
+</svg>
