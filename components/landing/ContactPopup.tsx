@@ -143,10 +143,10 @@ _Demande envoyée depuis le site Next Level_`;
                 Rappel immédiat
               </div>
               <h2 className="font-display text-2xl font-bold tracking-tight leading-tight text-cream">
-                Réserver mon audit
+                Réserver un appel
               </h2>
               <p className="text-sm text-ash mt-1 leading-relaxed">
-                Laissez vos coordonnées, on vous rappelle rapidement pour discuter de votre projet.
+                Laissez vos coordonnées. On vous rappelle sous 24h pour parler de votre projet — sans blabla commercial.
               </p>
             </div>
 

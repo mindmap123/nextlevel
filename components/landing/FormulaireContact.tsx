@@ -7,10 +7,10 @@ import RevealWords from "@/components/ui/RevealWords";
 import { usePopup } from "./PopupContext";
 
 const GUARANTEES = [
-  { icon: Clock, title: "7 jours", sub: "Délais tenus" },
-  { icon: ShieldCheck, title: "Sans engagement", sub: "Devis gratuit" },
-  { icon: CreditCard, title: "Paiement 3x", sub: "Sans frais dès 3 000€" },
-  { icon: LifeBuoy, title: "Suivi 3 mois", sub: "Après la mise en ligne" },
+  { icon: Clock, title: "7 jours", sub: "Délais tenus, pas 3 mois" },
+  { icon: ShieldCheck, title: "Zéro template", sub: "100% sur-mesure" },
+  { icon: CreditCard, title: "Paiement 3x", sub: "Dès 3 000€" },
+  { icon: LifeBuoy, title: "Suivi 3 mois", sub: "On ne disparaît pas" },
 ];
 
 export default function FormulaireContact() {
@@ -34,13 +34,13 @@ export default function FormulaireContact() {
             Un projet ?
           </p>
           <h2 className="font-display text-5xl sm:text-6xl md:text-[96px] font-bold tracking-[-0.045em] leading-[0.95] text-ink">
-            Obtenez votre
+            Parlons de
             <br />
-            <span className="text-accent">audit gratuit.</span>
+            <span className="text-accent">votre projet.</span>
           </h2>
           <RevealWords
             className="mt-8 block text-lg md:text-xl text-ink-soft leading-relaxed max-w-[52ch] mx-auto"
-            text="On analyse votre situation, on vous donne notre avis honnête, et on vous dit comment on peut vous aider. Sans engagement."
+            text="On regarde votre situation, on vous dit franchement ce qui cloche et comment on le règle. Si on n'est pas les bons, on vous le dira aussi."
           />
         </motion.div>
 
@@ -55,7 +55,7 @@ export default function FormulaireContact() {
             onClick={openPopup}
             className="group inline-flex items-center justify-center gap-2.5 bg-accent text-white font-semibold text-base px-8 py-4 rounded-full hover:bg-accent-dark transition-colors duration-200"
           >
-            Réserver mon audit
+            Réserver un appel
             <ArrowUpRight className="w-[18px] h-[18px] transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" strokeWidth={2.25} />
           </CTAButton>
 

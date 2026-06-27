@@ -30,7 +30,7 @@ export default function CtaBand() {
             </h2>
             <RevealWords
               className="mt-4 block text-white/85 text-lg max-w-[46ch]"
-              text="Audit gratuit en 30 min : on vous dit exactement quoi améliorer pour convertir plus."
+              text="30 minutes au téléphone. On regarde votre situation et on vous dit, sans détour, ce qui vous fait perdre des clients."
             />
           </motion.div>
 
@@ -58,7 +58,7 @@ export default function CtaBand() {
               onClick={openPopup}
               className="group inline-flex items-center justify-center gap-2.5 bg-white text-accent font-semibold text-base px-7 py-4 rounded-full hover:bg-night hover:text-white transition-colors duration-200 w-full sm:w-fit"
             >
-              Réserver mon audit gratuit
+              Réserver un appel
               <ArrowUpRight className="w-[18px] h-[18px] transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" strokeWidth={2.25} />
             </CTAButton>
           </motion.div>

@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { ArrowUpRight, Star } from "lucide-react";
+import { ArrowUpRight } from "lucide-react";
 import { usePopup } from "./PopupContext";
 import CTAButton from "@/components/ui/CTAButton";
 import AnimatedGradient from "@/components/ui/animated-gradient";
@@ -9,8 +9,8 @@ import CountUp from "@/components/ui/CountUp";
 
 const TRUST_STATS = [
   { node: <CountUp to={30} prefix="+" />, label: "projets livrés" },
-  { node: <CountUp to={4.9} decimals={1} suffix="/5" />, label: "satisfaction client" },
-  { node: <CountUp to={7} suffix=" j" />, label: "délai moyen" },
+  { node: <CountUp to={7} suffix=" j" />, label: "pour livrer un site" },
+  { node: <span>0</span>, label: "template recyclé" },
 ];
 
 const WAVE_CONFIG = {
@@ -103,7 +103,7 @@ export default function Hero() {
               onClick={openPopup}
               className="inline-flex items-center gap-2 bg-cream text-night font-semibold text-sm px-5 py-3 rounded-full hover:bg-accent hover:text-white transition-colors duration-200"
             >
-              Audit gratuit
+              Réserver un appel
               <ArrowUpRight className="w-4 h-4" strokeWidth={2.25} />
             </CTAButton>
           </div>
@@ -112,19 +112,20 @@ export default function Hero() {
         {/* ── HERO ── */}
         <section className="relative z-10">
           <div className="max-w-[1100px] mx-auto px-5 pt-16 pb-20 md:pt-24 md:pb-28 text-center flex flex-col items-center">
-            {/* Social proof */}
+            {/* Disponibilité — positionnement studio sélectif */}
             <motion.div
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.4 }}
               className="mb-8"
             >
-              <div className="flex items-center justify-center gap-1 mb-2">
-                {[...Array(5)].map((_, i) => (
-                  <Star key={i} className="w-4 h-4 text-accent fill-accent" />
-                ))}
-              </div>
-              <p className="text-sm font-semibold text-ash">+30 projets livrés</p>
+              <span className="inline-flex items-center gap-2.5 rounded-full border border-cream/15 bg-cream/[0.04] px-4 py-1.5 text-xs font-semibold text-ash backdrop-blur-sm">
+                <span className="relative flex w-2 h-2">
+                  <span className="pulse-ring absolute inline-flex w-full h-full rounded-full bg-accent" />
+                  <span className="relative inline-flex w-2 h-2 rounded-full bg-accent" />
+                </span>
+                Studio web français · projets sur sélection
+              </span>
             </motion.div>
 
             <h1 className="font-display font-bold tracking-[-0.04em] leading-[0.98] text-[clamp(40px,7.5vw,92px)] max-w-[16ch]">
@@ -133,17 +134,27 @@ export default function Hero() {
               ))}
             </h1>
 
+            <motion.p
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.4, delay: 0.45 }}
+              className="mt-8 text-lg md:text-xl text-ash leading-relaxed max-w-[46ch]"
+            >
+              Sur-mesure, livrés en 7 jours, pensés pour vendre.
+              Pas des brochures en ligne.
+            </motion.p>
+
             <motion.div
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.4, delay: 0.5 }}
+              transition={{ duration: 0.4, delay: 0.55 }}
               className="mt-10"
             >
               <CTAButton
                 onClick={openPopup}
                 className="group inline-flex items-center justify-center gap-2.5 bg-accent text-white font-semibold text-base px-8 py-4 rounded-full hover:bg-accent-dark transition-colors duration-200"
               >
-                Réserver mon audit
+                Réserver un appel
                 <ArrowUpRight className="w-[18px] h-[18px] transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" strokeWidth={2.25} />
               </CTAButton>
             </motion.div>
@@ -154,11 +165,11 @@ export default function Hero() {
               transition={{ duration: 0.4, delay: 0.6 }}
               className="mt-5 flex flex-wrap items-center justify-center gap-x-5 gap-y-2 text-sm text-ash-dim"
             >
-              <span>Site en 7 jours</span>
+              <span>Livré en 7 jours</span>
               <span className="w-1 h-1 rounded-full bg-ash-dim" />
-              <span>Sans engagement</span>
+              <span>100% sur-mesure</span>
               <span className="w-1 h-1 rounded-full bg-ash-dim" />
-              <span>Devis gratuit</span>
+              <span>Suivi 3 mois</span>
             </motion.div>
           </div>
 
@@ -219,7 +230,7 @@ export default function Hero() {
           onClick={openPopup}
           className="flex-shrink-0 whitespace-nowrap bg-accent text-white text-xs font-semibold px-4 py-2 rounded-full hover:bg-accent-dark transition-colors"
         >
-          Audit gratuit →
+          Réserver un appel →
         </CTAButton>
       </div>
     </>

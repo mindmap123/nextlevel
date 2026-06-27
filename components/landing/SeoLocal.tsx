@@ -159,7 +159,7 @@ export default function SeoLocal() {
               rel="noopener noreferrer"
               className="group mt-10 inline-flex items-center justify-center gap-2.5 bg-accent text-white font-semibold text-base px-7 py-4 rounded-full hover:bg-accent-dark transition-colors duration-200"
             >
-              Mon audit GMB gratuit
+              Auditer ma fiche Google
               <ArrowUpRight className="w-[18px] h-[18px] transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" strokeWidth={2.25} />
             </a>
           </motion.div>

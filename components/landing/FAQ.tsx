@@ -27,7 +27,7 @@ const FAQS = [
   },
   {
     q: "Quelles garanties ?",
-    a: "Correction de bugs gratuite pendant 3 mois (6 mois pour les applications). Tant que le design n'est pas validé, on le reprend sans frais.",
+    a: "Bugs corrigés et inclus pendant 3 mois (6 mois pour les applications). Tant que le design n'est pas validé, on le reprend, point.",
   },
   {
     q: "Vous travaillez hors de France ?",
