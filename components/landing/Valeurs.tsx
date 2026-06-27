@@ -14,7 +14,7 @@ const NEVER = [
 
 export default function Valeurs() {
   return (
-    <section id="manifeste" className="py-20 md:py-28 bg-night">
+    <section id="manifeste" className="py-20 md:py-28 bg-coal">
       <div className="max-w-[1280px] mx-auto px-5">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
