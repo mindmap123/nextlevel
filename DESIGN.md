@@ -72,3 +72,12 @@ la monotonie. Bande CTA accent au milieu.
 - **Animations média** (globals.css) : `.wave-bar` (waveform audio), `.pulse-ring` (appel entrant / pin Maps), `.animate-floaty` (cartes mockup), `.animate-blink` (point statut).
 - **Vague signature** : `components/ui/WaveDivider.tsx` (SVG sinusoïdal 2 couches, `.wave-flow-slow/fast` translateX en boucle) — bas du Hero + haut du Footer, reprend la « vague » du site original.
 - Duration micro 150 / short 200 / medium 280ms. `prefers-reduced-motion` : toutes les animations coupées (marquee, wave, pulse, floaty, blink, CountUp → valeur finale directe).
+
+## Interactions signature (juin 2026 — « fun qui convertit »)
+> Palette + logo inchangés. On garde le Dark Growth, on ajoute de la vie réactive au curseur.
+- **CTA magnétique** (`components/ui/CTAButton.tsx`, `.cta-magnetic`) : le bouton suit légèrement le curseur (translate max ~ qq px) + `drop-shadow` accent au hover. Confetti déjà au clic. Désactivé `pointer:coarse` / `reduced-motion`.
+- **Hero parallax** (`Hero.tsx`, `.hero-parallax`) : auroras + shader dérivent vers le curseur (translate ±~30px, transition 0.5s). Shader hero remonté à opacity 0.72. Desktop only.
+- **Cartes Réalisations tilt 3D** (`Realisations.tsx`, `.tilt-card` + `.tilt-sheen`) : rotateX/Y au survol (perspective 900px), zoom média 1.04, sheen radial accent suivant le curseur, ombre portée. Désactivé `pointer:coarse`.
+- **Lignes Services vivantes** (`ServicesOfferts.tsx`) : barre accent verticale qui scale-in au hover, numéro agrandi → accent, titre qui glisse, fond `card/40`.
+- **Barre de progression scroll** (`Ambiance.tsx`, `.scroll-progress`) : filet accent fixe en haut, `scaleX` = ratio de scroll. z-70.
+- Toutes ces interactions respectent `prefers-reduced-motion` (neutralisées) et `pointer:coarse` (pas de suivi curseur).
