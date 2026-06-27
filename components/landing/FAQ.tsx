@@ -3,6 +3,7 @@
 import { useState, useMemo } from "react";
 import { Plus, Minus, Search } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
+import SectionAura from "@/components/ui/SectionAura";
 
 const FAQS = [
   {
@@ -46,8 +47,9 @@ export default function FAQ() {
   }, [query]);
 
   return (
-    <section id="faq" className="py-20 md:py-28 bg-night">
-      <div className="max-w-[1280px] mx-auto px-5 grid md:grid-cols-[0.8fr_1.2fr] gap-12 md:gap-16">
+    <section id="faq" className="relative overflow-hidden py-20 md:py-28 bg-night">
+      <SectionAura color="#FF4D17" position="bottom-right" opacity={0.08} />
+      <div className="relative z-10 max-w-[1280px] mx-auto px-5 grid md:grid-cols-[0.8fr_1.2fr] gap-12 md:gap-16">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}

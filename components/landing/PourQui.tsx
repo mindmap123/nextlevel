@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
+import SectionAura from "@/components/ui/SectionAura";
 
 const QUESTIONS = [
   {
@@ -23,8 +24,9 @@ const QUESTIONS = [
 
 export default function PourQui() {
   return (
-    <section id="pour-qui" className="py-20 md:py-28 bg-night">
-      <div className="max-w-[1280px] mx-auto px-5">
+    <section id="pour-qui" className="relative overflow-hidden py-20 md:py-28 bg-night">
+      <SectionAura color="#F59E0B" position="top-left" opacity={0.08} />
+      <div className="relative z-10 max-w-[1280px] mx-auto px-5">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}

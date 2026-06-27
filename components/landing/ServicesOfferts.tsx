@@ -3,6 +3,7 @@
 import { motion } from "framer-motion";
 import { ArrowUpRight, Check } from "lucide-react";
 import { usePopup } from "./PopupContext";
+import SectionAura from "@/components/ui/SectionAura";
 
 type Pillar = {
   number: string;
@@ -54,8 +55,9 @@ export default function ServicesOfferts() {
   const { openPopup } = usePopup();
 
   return (
-    <section id="services" className="py-20 md:py-28 bg-coal">
-      <div className="max-w-[1280px] mx-auto px-5">
+    <section id="services" className="relative overflow-hidden py-20 md:py-28 bg-coal">
+      <SectionAura color="#FF6B3D" position="top-right" opacity={0.09} />
+      <div className="relative z-10 max-w-[1280px] mx-auto px-5">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}

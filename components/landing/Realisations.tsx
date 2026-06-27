@@ -3,6 +3,7 @@
 import { motion } from "framer-motion";
 import Image from "next/image";
 import { useRef } from "react";
+import SectionAura from "@/components/ui/SectionAura";
 
 type Project = {
   title: string;
@@ -98,8 +99,9 @@ function ProjectMedia({ project }: { project: Project }) {
 
 export default function Realisations() {
   return (
-    <section id="realisations" className="py-20 md:py-28 bg-night">
-      <div className="max-w-[1280px] mx-auto px-5">
+    <section id="realisations" className="relative overflow-hidden py-20 md:py-28 bg-night">
+      <SectionAura color="#FFB020" position="bottom-left" opacity={0.07} />
+      <div className="relative z-10 max-w-[1280px] mx-auto px-5">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}

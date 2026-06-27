@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import { X } from "lucide-react";
+import SectionAura from "@/components/ui/SectionAura";
 
 const NEVER = [
   "Des templates recyclés vendus au prix du sur-mesure.",
@@ -14,8 +15,9 @@ const NEVER = [
 
 export default function Valeurs() {
   return (
-    <section id="manifeste" className="py-20 md:py-28 bg-coal">
-      <div className="max-w-[1280px] mx-auto px-5">
+    <section id="manifeste" className="relative overflow-hidden py-20 md:py-28 bg-coal">
+      <SectionAura color="#E8431A" position="top-right" opacity={0.08} />
+      <div className="relative z-10 max-w-[1280px] mx-auto px-5">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
