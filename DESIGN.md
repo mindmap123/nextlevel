@@ -1,96 +1,74 @@
 # Design System — Next Level
 
+> Refonte « Dark Growth » (mai 2026). Structure inspirée de growthopportunity.fr,
+> base sombre quasi-noir, accent orange brûlé signature Next Level.
+
 ## Product Context
-- **What this is:** Site landing page d'une agence web française proposant 3 piliers : sites web sur mesure, référencement local/GMB, et outils métier sur mesure.
-- **Who it's for:** TPE et e-commerce (boulangeries, boutiques Shopify, artisans, professions libérales, PME locales)
-- **Space/industry:** Agence web / digital, marché français
-- **Project type:** Landing page marketing — conversion-focused, mobile-first
+- **What this is:** Landing page d'une agence web française. 4 piliers : sites web, SEO local/GMB, outils métier sur mesure, agent vocal IA.
+- **Who it's for:** TPE, artisans, professions libérales, PME locales, e-commerce.
+- **Project type:** Landing marketing — conversion-focused, mobile-first.
 
 ## Aesthetic Direction
-- **Direction:** Clean & Assertif — ni le froid du cabinet de conseil, ni le toy design startup. Fort, direct, accessible. Le premier viewport fonctionne comme une affiche.
-- **Decoration level:** Intentional — gradient brand utilisé stratégiquement (boutons CTA, titres em, CTA band), pas omniprésent
-- **Mood:** Professionnel et accessible. Le visiteur doit ressentir confiance et compétence dès les 3 premières secondes. Pas intimidant pour une TPE.
-- **Key rule:** Le gradient brand (violet→bleu) est une signature visuelle forte — l'utiliser sur les CTA primaires, les titres `em` en hero, et la CTA band. Jamais sur des éléments décoratifs secondaires.
+- **Direction:** Dark Growth. Fond quasi-noir premium, grosse typo grotesque, un seul accent chaud. Inspiration structurelle : agences growth (GO).
+- **Decoration level:** Minimal. Filets fins (`.rule`), grilles bordées, zéro gradient, zéro ombre. Accent rare = impact.
+- **Mood:** Premium, direct, « on accélère votre croissance ». Sérieux mais accessible TPE.
+- **Key rule:** L'accent orange est réservé aux CTA, chiffres-clés et mots-emphase des titres. Jamais en fond.
+- **Signature visuelle :** labels de section entre parenthèses `(Services)`, `(Équipe)`… + filet accent. Wordmark géant en footer.
+
+## Structure (ordre des sections — inspirée GO)
+Base sombre, fonds **clairs de temps en temps** (Process, Avis, Contact) pour casser
+la monotonie. Bande CTA accent au milieu.
+
+1. **Hero** (sombre) — centré : ★★★★★ + preuve sociale au-dessus du titre, headline mots-accent, CTA unique, chips, logo strip + intro.
+2. **(Pour qui)** (sombre) — cible + 4 value props en questions (« Vous voulez… ? » → réponse).
+3. **(Services)** (sombre) — 4 lignes numérotées 01-04, tag Best-seller, desc + CTA + livrables cochés.
+4. **Bande CTA** (accent orange) — stats animées (CountUp) + « Réserver mon audit ». Levier conversion mi-page.
+5. **(Agent vocal IA)** (sombre) — VoiceCaptur : pipeline 3 étapes (appel → décroche → RDV) + avant/après (Sans agent/Avec), mockup d'appel animé + carte résultat « RDV pris », compteurs, voix, CTA démo → voicecaptur.vercel.app.
+6. **(Référencement local)** (sombre) — Next Level GMB : mockup Google Maps « Pack 3 » (carte blanche, vous #1 avec pin pulsant + avis + boutons appeler/itinéraire), avant/après #12→#1, leviers, CTA audit GMB → nextlevel-gmb.vercel.app.
+7. **(Process)** (CLAIR) — timeline 7 jours, J1 → J+7.
+6. **(Réalisations)** (sombre) — études de cas larges alternées + métrique géante (vidéos).
+7. **(Valeurs)** (sombre) — liste numérotée 01-05.
+8. **(Avis)** (CLAIR) — mur de témoignages, étoiles + métrique géante.
+9. **(FAQ)** (sombre) — accordéon, 1re question = prix.
+10. **Contact** (CLAIR) — bloc CTA géant « Obtenez votre audit gratuit » + rangée garanties (7j · sans engagement · paiement 3x · suivi 3 mois).
+11. **Footer** (sombre) — wordmark géant `Next.Level` + colonnes nav/contact/légal.
+
+> Section Équipe retirée. Fonds clairs : `bone` / `bone-2` / `bone-card` + texte `ink`.
 
 ## Typography
-- **Display/Hero:** Fraunces — serif variable, expressif et chaleureux. Utilisé exclusivement sur les H1 et H2. Mémorable, personne d'autre dans la catégorie agences web FR n'utilise un serif comme display.
-  - Hero : clamp(40px, 10.5vw, 88px) / font-weight: 700 / letter-spacing: -0.04em / line-height: 1.02
-  - H2 sections : clamp(28px, 7vw, 48px) / font-weight: 700 / letter-spacing: -0.035em / line-height: 1.08
-  - Style italic (em) : gradient brand appliqué en background-clip text
-- **Body:** Plus Jakarta Sans — lisible, moderne, neutre. Pour tout le reste : paragraphes, nav, labels, boutons, tags.
-  - Body : 15-16px / line-height: 1.65-1.7
-  - UI labels : 11-13px / font-weight: 700 / letter-spacing: 0.06-0.1em / text-transform: uppercase
-- **Loading:** Google Fonts — `Fraunces:ital,opsz,wght@0,9..144,400;600;700;900;1,9..144,600;700` + `Plus+Jakarta+Sans:wght@300;400;500;600;700`
+- **Display:** Bricolage Grotesque — H1/H2, titres, chiffres. Tracking serré négatif.
+  - Hero : clamp(40px, 7.5vw, 92px) / weight 700 / -0.04em / line-height 0.98
+  - H2 : clamp(40 → 64px) / -0.04em
+  - Wordmark footer : clamp(56px, 16vw, 220px)
+  - Emphase : mot en `text-accent`, jamais en gradient
+- **Body:** Plus Jakarta Sans — 15-19px / line-height 1.6-1.7. Labels uppercase 11-12px / 0.14em.
+- **Loading:** next/font/google — `Bricolage_Grotesque` (400/600/700/800) + `Plus_Jakarta_Sans`.
 
-## Color
-- **Approach:** Brand gradient comme accent unique, neutraux froids, un fond blanc pur
+## Color (source globals.css @theme)
+- **Night:** `#0E0F0B` — fond principal
+- **Coal:** `#15160F` — sections alternées
+- **Card:** `#1B1C14` — surfaces / cartes / modal
+- **Cream:** `#F4F2EA` — texte principal
+- **Ash:** `#A8A59B` — sous-titres
+- **Ash Dim:** `#6E6B61` — labels, métadonnées
+- **Accent:** `#FF4D17` — orange brûlé, accent unique
+- **Accent Dark:** `#DB3D0C` — hover
+- **Line:** `rgba(244,242,234,0.12)` (`.rule`) / strong `0.22` (`.rule-strong`)
 
-### Palette exacte (source globals.css)
-- **Primary:** `#7B2FF2` — violet, couleur signature, CTA, accents
-- **Primary Dark:** `#6222CC` — hover state des éléments primaires
-- **Secondary:** `#0066FF` — bleu, second pôle du gradient brand
-- **Accent:** `#00A3FF` — bleu clair, utilisable pour highlights secondaires
-- **Gradient Brand:** `linear-gradient(135deg, #7B2FF2 0%, #0066FF 100%)` — boutons CTA, section hero em, CTA band background, sticky CTA
-- **Background:** `#FFFFFF` — fond principal
-- **Background Soft:** `#F8F9FC` — sections alternées (logo strip, process)
-- **Background Muted:** `#F1F3F8` — inputs, cards neutres
-- **Surface:** `#FFFFFF` — cards, modals
-- **Text Primary:** `#1A1A2E` — texte principal
-- **Text Secondary:** `#64748B` — sous-titres, descriptions
-- **Text Muted:** `#94A3B8` — labels, placeholders, métadonnées
-- **Border:** `#E2E8F0` — bordures normales
-- **Border Light:** `#F1F5F9` — séparateurs légers
-- **Shadow Brand:** `0 4px 24px -4px rgba(123,47,242,.25)`
-- **Shadow Brand LG:** `0 8px 40px -8px rgba(123,47,242,.30)`
-
-### Dark mode
-- BG: `#0D0D1A` / Surface: `#13132A` / Text: `#F0F0FF` / Muted: `#8B98B5` / Border: `#252534`
+> Pas de mode clair. Wordmark logo forcé en `.wordmark-cream` (blanc) sur fond sombre.
 
 ## Spacing
-- **Base unit:** 4px (grid 4pt, pratique 8pt)
-- **Density:** Comfortable (sections : 52px mobile / 80px desktop)
-- **Scale:** 4 · 8 · 12 · 16 · 20 · 24 · 32 · 40 · 48 · 64 · 80 · 96
-
-## Layout
-- **Approach:** Mobile-first strict — chaque composant pensé 390px d'abord, desktop en override CSS
-- **Hero:** Plein écran, headline domine les 2/3 du viewport, 1 seul CTA primaire
-- **Nav:** Logo gauche + 1 seul CTA droit "Être recontacté" — pas de menu burger, pas de liens de navigation (c'est une landing)
-- **Services:** 3 piliers en cards verticales mobile → grid 2 cols tablet → grid 3 cols desktop. Pilier 1 en "featured" card (gradient brand)
-- **Témoignages:** Scroll horizontal sur mobile (overflow-x: auto, scrollbar-width: none)
-- **Logos clients:** Scroll horizontal mobile
-- **Grid:** 4/8/12 colonnes selon breakpoint
-- **Max content width:** 1200px
-- **Border radius:** sm: 8px, md: 14px, lg: 20px, xl: 28px, full: 9999px
-- **Breakpoints:** 640px (popup centré) / 768px (2 cols) / 1100px (3 cols)
+- Base 4px. Sections `py-20 md:py-28`. Max width 1280px. Scale 4·8·12·16·20·24·32·40·48·64·80·96·112.
 
 ## Conversion
-- **CTA unique:** "Être recontacté" — un seul message, tous les boutons primaires du site ouvrent le même popup
-- **Sticky bottom CTA:** Toujours visible sur mobile. Background `#1A1A2E`, bouton gradient brand
-- **Popup modal:** Bottom sheet sur mobile (border-radius top uniquement), modal centré sur desktop (≥640px). Animation slideUp 0.25s
-  - Champs : Prénom · Email · Téléphone · Budget (3 options : 1k-5k / +5k / Pas de budget défini)
-  - Confirmation visuelle au submit (bouton vert + fermeture auto 2s)
-- **Proof points hero:** 4 stats en grid 2×2 mobile / 4 cols desktop — immédiatement après le CTA
-- **Zéro mention de tarifs** sur la landing
-- **Zéro mention "gratuit"**
+- **CTA unique répété :** « Réserver mon audit » / « Audit gratuit » → même popup. Nav = CTA crème (inversé).
+- **Sticky bottom CTA mobile** : surface card + bouton accent.
+- **Popup** : bottom sheet mobile / modal desktop, surface `card`, champs sur `night`, accent sur focus.
+- **Preuve** : ★ + « +30 projets livrés » en hero ; métriques géantes en réalisations/avis ; prix en FAQ.
 
 ## Motion
-- **Approach:** Minimal-fonctionnel — aucune animation en boucle, pas d'orbes, pas de perspective grid
-- **Easing:** enter: ease-out / exit: ease-in / move: ease-in-out
-- **Duration:** micro: 150ms / short: 200ms / medium: 280ms
-- **Autorisé:** fade+translate au scroll (Framer Motion), slideUp popup, hover translateY(-2px) sur boutons, blink badge dot
-
-## 3 Piliers — Structure de contenu
-1. **Sites web sur mesure** — vitrine, e-commerce, landing, refonte, SEO technique inclus
-2. **Référencement local & GMB** — fiche Google My Business, citations locales, gestion avis, suivi positions
-3. **Outils métier sur mesure** — CRM clients, calculateur de marges/devis, réservation en ligne, portail client, gestion de stock, dashboard analytique métier
-
-## Decisions Log
-| Date | Decision | Rationale |
-|------|----------|-----------|
-| 2026-04-12 | Fraunces comme display font | Mémorable, personne d'autre dans la catégorie agences web FR n'utilise un serif — différenciation immédiate |
-| 2026-04-12 | Gradient violet→bleu conservé mais limité | Couleur brand existante, valeur de reconnaissance. Limité aux CTA + hero em pour éviter le pattern "gradient partout" |
-| 2026-04-12 | 3 piliers au lieu de liste de services | Structure plus claire pour TPE/PME — 3 expertises distinctes, 1 seul partenaire |
-| 2026-04-12 | Popup "Être recontacté" unique | 1 seul CTA sur toute la landing = zéro friction, zéro confusion sur quoi faire |
-| 2026-04-12 | Budget 3 options (1k-5k / +5k / pas de budget) | Qualifier sans intimider — pas de seuil bas qui dévalue, pas de budget obligatoire |
-| 2026-04-12 | Mobile-first strict | Cible TPE/PME consulte majoritairement sur mobile. Base = 390px, desktop en override |
-| 2026-04-12 | Zéro tarifs sur la landing | Positionnement partenaire, pas prestataire prix. La conversation commence au rappel |
+- Word-reveal hero (settle < 1.6s), fade+translate au scroll (`whileInView`, `once`), marquee logos, soulignés `.link-underline`, hover accent.
+- **Compteurs animés** : `components/ui/CountUp.tsx` (rAF, easing cubic, déclenché in-view) — bande CTA + section agent vocal.
+- **Animations média** (globals.css) : `.wave-bar` (waveform audio), `.pulse-ring` (appel entrant / pin Maps), `.animate-floaty` (cartes mockup), `.animate-blink` (point statut).
+- **Vague signature** : `components/ui/WaveDivider.tsx` (SVG sinusoïdal 2 couches, `.wave-flow-slow/fast` translateX en boucle) — bas du Hero + haut du Footer, reprend la « vague » du site original.
+- Duration micro 150 / short 200 / medium 280ms. `prefers-reduced-motion` : toutes les animations coupées (marquee, wave, pulse, floaty, blink, CountUp → valeur finale directe).

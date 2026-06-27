@@ -1,74 +1,102 @@
 "use client";
 
 import Link from "next/link";
-import Image from "next/image";
-import { MessageCircle, ArrowUpRight } from "lucide-react";
+import { MessageCircle } from "lucide-react";
+import AnimatedGradient from "@/components/ui/animated-gradient";
+
+const WAVE_CONFIG = {
+  preset: "custom" as const,
+  color1: "#12130D",
+  color2: "#FF4D17",
+  color3: "#C2410C",
+  rotation: -20,
+  proportion: 42,
+  scale: 0.3,
+  speed: 35,
+  distortion: 3,
+  swirl: 40,
+  swirlIterations: 6,
+  softness: 100,
+  offset: 0,
+  shape: "Checks" as const,
+  shapeSize: 40,
+};
 
 export default function Footer() {
-    const phoneNumber = "+33626834020";
-    const whatsappMessage = encodeURIComponent("Bonjour, j'ai une question !");
-    const whatsappUrl = `https://wa.me/${phoneNumber.replace(/\+/g, '')}?text=${whatsappMessage}`;
+  const phoneNumber = "+33626834020";
+  const whatsappMessage = encodeURIComponent("Bonjour, j'ai une question !");
+  const whatsappUrl = `https://wa.me/${phoneNumber.replace(/\+/g, "")}?text=${whatsappMessage}`;
 
-    return (
-        <footer className="relative text-white py-16">
+  return (
+    <footer className="relative bg-night overflow-hidden border-t rule">
+      {/* ── VAGUE animée (fond shader, signature du site original) ── */}
+      <div aria-hidden className="pointer-events-none absolute inset-0 z-0 overflow-hidden">
+        <div className="hero-aurora hero-aurora--1" style={{ bottom: "-20%", left: "10%", width: "55vw", height: "55vw" }} />
+        <div className="hero-aurora hero-aurora--3" style={{ top: "-18%", right: "-10%", width: "48vw", height: "48vw" }} />
+        <AnimatedGradient config={WAVE_CONFIG} style={{ opacity: 0.55 }} />
+        <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(18,19,13,0.3)_0%,rgba(18,19,13,0.55)_60%,rgba(18,19,13,0.8)_100%)]" />
+      </div>
 
-            <div className="max-w-[1200px] mx-auto px-5 relative z-10">
-                <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-10 mb-12">
-                    <div className="sm:col-span-2 lg:col-span-1">
-                        <Link href="/" className="block mb-4">
-                            <Image
-                                src="/logos/next-level-logo.svg"
-                                alt="Next Level"
-                                width={200}
-                                height={40}
-                                className="h-10 w-auto brightness-0 invert"
-                            />
-                        </Link>
-                        <p className="text-slate-400 text-sm leading-relaxed mb-4">
-                            Nous transformons votre expertise en présence digitale performante. Sites web, applications sur mesure et visibilité locale pour générer des clients qualifiés.
-                        </p>
-                        <a
-                            href={whatsappUrl}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="inline-flex items-center gap-2 text-sm text-[#25D366] hover:text-[#20BA5A] transition-colors"
-                        >
-                            <MessageCircle className="w-4 h-4" />
-                            Discuter sur WhatsApp
-                        </a>
-                    </div>
+      <div className="relative z-10 max-w-[1280px] mx-auto px-5 pt-16 pb-10">
+        {/* Wordmark géant */}
+        <div className="border-b rule pb-10 mb-10">
+          <img
+            src="/logos/next-level-wordmark-dark.svg"
+            alt="Next.Level"
+            className="w-full h-auto block"
+          />
+        </div>
 
-                    <div>
-                        <h4 className="font-bold text-white mb-4 text-sm">Services</h4>
-                        <ul className="space-y-2.5 text-sm text-slate-400">
-                            <li><Link href="#sites" className="hover:text-white transition-colors flex items-center gap-1">Sites Web <ArrowUpRight className="w-3 h-3" /></Link></li>
-                            <li><Link href="#apps" className="hover:text-white transition-colors flex items-center gap-1">Applications <ArrowUpRight className="w-3 h-3" /></Link></li>
-                            <li><Link href="#gmb" className="hover:text-white transition-colors flex items-center gap-1">Google My Business <ArrowUpRight className="w-3 h-3" /></Link></li>
-                        </ul>
-                    </div>
+        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-10 mb-12">
+          <div className="sm:col-span-2 lg:col-span-1">
+            <p className="text-ash text-sm leading-relaxed mb-5 max-w-[36ch]">
+              On transforme votre expertise en présence digitale performante. Sites,
+              applications sur mesure et visibilité locale pour générer des clients qualifiés.
+            </p>
+            <a
+              href={whatsappUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 text-sm text-accent hover:text-accent-dark transition-colors"
+            >
+              <MessageCircle className="w-4 h-4" />
+              Discuter sur WhatsApp
+            </a>
+          </div>
 
-                    <div>
-                        <h4 className="font-bold text-white mb-4 text-sm">Agence</h4>
-                        <ul className="space-y-2.5 text-sm text-slate-400">
-                            <li><Link href="#portfolio" className="hover:text-white transition-colors">Témoignages</Link></li>
-                            <li><Link href="#contact" className="hover:text-white transition-colors">Contact</Link></li>
-                        </ul>
-                    </div>
+          <div>
+            <h4 className="font-bold text-cream mb-4 text-sm">Navigation</h4>
+            <ul className="space-y-2.5 text-sm text-ash">
+              <li><Link href="#pour-qui" className="hover:text-accent transition-colors">Pour qui</Link></li>
+              <li><Link href="#services" className="hover:text-accent transition-colors">Services</Link></li>
+              <li><Link href="#realisations" className="hover:text-accent transition-colors">Réalisations</Link></li>
+              <li><Link href="#avis" className="hover:text-accent transition-colors">Avis</Link></li>
+            </ul>
+          </div>
 
-                    <div>
-                        <h4 className="font-bold text-white mb-4 text-sm">Légal</h4>
-                        <ul className="space-y-2.5 text-sm text-slate-400">
-                            <li><Link href="/mentions-legales" className="hover:text-white transition-colors">Mentions Légales</Link></li>
-                            <li><Link href="/politique-confidentialite" className="hover:text-white transition-colors">Politique de Confidentialité</Link></li>
-                            <li><Link href="/cgv" className="hover:text-white transition-colors">CGV</Link></li>
-                        </ul>
-                    </div>
-                </div>
+          <div>
+            <h4 className="font-bold text-cream mb-4 text-sm">Contact</h4>
+            <ul className="space-y-2.5 text-sm text-ash">
+              <li><Link href="#contact" className="hover:text-accent transition-colors">Appel découverte</Link></li>
+              <li><a href={whatsappUrl} target="_blank" rel="noopener noreferrer" className="hover:text-accent transition-colors">WhatsApp</a></li>
+            </ul>
+          </div>
 
-                <div className="pt-8 border-t border-white/10 flex flex-col sm:flex-row justify-center items-center">
-                    <p className="text-slate-500 text-sm">&copy; 2026 Next Level. Tous droits réservés.</p>
-                </div>
-            </div>
-        </footer>
-    );
+          <div>
+            <h4 className="font-bold text-cream mb-4 text-sm">Légal</h4>
+            <ul className="space-y-2.5 text-sm text-ash">
+              <li><Link href="/mentions-legales" className="hover:text-accent transition-colors">Mentions Légales</Link></li>
+              <li><Link href="/politique-confidentialite" className="hover:text-accent transition-colors">Confidentialité</Link></li>
+              <li><Link href="/cgv" className="hover:text-accent transition-colors">CGV</Link></li>
+            </ul>
+          </div>
+        </div>
+
+        <div className="pt-8 border-t rule flex flex-col sm:flex-row justify-between items-center gap-3">
+          <p className="text-ash-dim text-sm">&copy; 2026 Next Level. Tous droits réservés.</p>
+          <p className="text-ash-dim text-sm">Votre site en 7 jours, pas en 3 mois.</p>
+        </div>
+      </div>
+    </footer>
+  );
 }

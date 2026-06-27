@@ -1,11 +1,12 @@
 import '@/app/globals.css';
-import { Fraunces, Plus_Jakarta_Sans } from 'next/font/google';
+import { Bricolage_Grotesque, Plus_Jakarta_Sans } from 'next/font/google';
+import Ambiance from '@/components/ui/Ambiance';
 
-const fraunces = Fraunces({
+const bricolage = Bricolage_Grotesque({
   subsets: ['latin'],
-  variable: '--font-fraunces',
+  variable: '--font-bricolage',
   display: 'swap',
-  axes: ['opsz'],
+  weight: ['400', '600', '700', '800'],
 });
 
 const plusJakartaSans = Plus_Jakarta_Sans({
@@ -15,8 +16,8 @@ const plusJakartaSans = Plus_Jakarta_Sans({
 });
 
 export const metadata = {
-  title: 'Next Level | Agence Web qui Convertit - Sites & Apps Sur Mesure',
-  description: 'Agence web spécialisée en sites haute-conversion, applications sur mesure et référencement local. Transformez vos visiteurs en clients.',
+  title: 'Next Level | Votre site en 7 jours, pas en 3 mois',
+  description: 'Agence web française. Sites haute-conversion, SEO local et outils métier sur mesure, livrés en 7 jours. Audit honnête et gratuit.',
 };
 
 export default function RootLayout({
@@ -25,8 +26,9 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="fr" className={`${fraunces.variable} ${plusJakartaSans.variable} scroll-smooth h-full`} suppressHydrationWarning>
-      <body className="bg-white text-[#1A1A2E] min-h-full font-body antialiased m-0 p-0">
+    <html lang="fr" className={`${bricolage.variable} ${plusJakartaSans.variable} scroll-smooth h-full`} suppressHydrationWarning>
+      <body className="bg-night text-cream min-h-full font-body antialiased m-0 p-0">
+        <Ambiance />
         {children}
       </body>
     </html>
