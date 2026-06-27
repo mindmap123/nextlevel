@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { ArrowUpRight } from "lucide-react";
+import { ArrowUpRight, Star, ShieldCheck, Zap, CreditCard } from "lucide-react";
 import { useRef } from "react";
 import { usePopup } from "./PopupContext";
 import CTAButton from "@/components/ui/CTAButton";
@@ -12,6 +12,13 @@ const TRUST_STATS = [
   { node: <CountUp to={30} prefix="+" />, label: "projets livrés" },
   { node: <CountUp to={7} suffix=" j" />, label: "pour livrer un site" },
   { node: <span>0</span>, label: "template recyclé" },
+];
+
+const BADGES = [
+  { icon: Star, label: "4,9/5 sur Google", iconClass: "text-accent", fill: "currentColor" },
+  { icon: ShieldCheck, label: "Garantie 3 mois", iconClass: "text-accent", fill: "none" },
+  { icon: Zap, label: "Livré en 7 jours", iconClass: "text-accent", fill: "none" },
+  { icon: CreditCard, label: "Paiement 3x sans frais", iconClass: "text-accent", fill: "none" },
 ];
 
 const WAVE_CONFIG = {
@@ -235,6 +242,19 @@ export default function Hero() {
                 <div className="stat-num text-3xl md:text-4xl text-accent">{s.node}</div>
                 <div className="mt-1.5 text-xs md:text-sm text-ash">{s.label}</div>
               </div>
+            ))}
+          </div>
+
+          {/* badges confiance */}
+          <div className="mt-12 flex flex-wrap items-center justify-center gap-3">
+            {BADGES.map((b) => (
+              <span
+                key={b.label}
+                className="badge-trust inline-flex items-center gap-2 rounded-full border rule bg-night/60 px-4 py-2 text-sm text-ash backdrop-blur-sm transition-colors duration-300 hover:border-accent/50 hover:text-cream"
+              >
+                <b.icon className={`w-4 h-4 ${b.iconClass}`} strokeWidth={2.25} fill={b.fill} />
+                {b.label}
+              </span>
             ))}
           </div>
         </div>
