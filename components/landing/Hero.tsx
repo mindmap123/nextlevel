@@ -195,6 +195,46 @@ export default function Hero() {
               <span className="w-1 h-1 rounded-full bg-ash-dim" />
               <span>Suivi 3 mois</span>
             </motion.div>
+
+            {/* ── Mockup navigateur : vrai site en mouvement ── */}
+            <motion.div
+              initial={{ opacity: 0, y: 40 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.7, delay: 0.7, ease: [0.22, 1, 0.36, 1] }}
+              className="mt-16 w-full max-w-[940px]"
+            >
+              <div className="tilt-card !rounded-2xl bg-card border rule overflow-hidden text-left">
+                {/* barre navigateur */}
+                <div className="flex items-center gap-3 px-4 py-3 border-b rule bg-night/60">
+                  <div className="flex gap-1.5">
+                    <span className="w-3 h-3 rounded-full bg-cream/15" />
+                    <span className="w-3 h-3 rounded-full bg-cream/15" />
+                    <span className="w-3 h-3 rounded-full bg-cream/15" />
+                  </div>
+                  <div className="flex-1 flex justify-center">
+                    <span className="inline-flex items-center gap-2 rounded-full bg-night/80 border rule px-4 py-1 text-xs text-ash-dim max-w-[260px] w-full justify-center">
+                      <span className="w-1.5 h-1.5 rounded-full bg-accent" />
+                      votre-site.fr
+                    </span>
+                  </div>
+                  <span className="text-[10px] font-bold uppercase tracking-[0.12em] text-accent">Live</span>
+                </div>
+                {/* contenu : vrai site qui bouge */}
+                <div className="aspect-[16/9] bg-night overflow-hidden relative">
+                  <video
+                    src="/videos/archidomo.mp4"
+                    autoPlay
+                    muted
+                    loop
+                    playsInline
+                    preload="auto"
+                    poster="/videos/archidomo-poster.jpg"
+                    className="object-cover w-full h-full"
+                  />
+                  <span aria-hidden className="tilt-sheen" />
+                </div>
+              </div>
+            </motion.div>
           </div>
 
         </section>
