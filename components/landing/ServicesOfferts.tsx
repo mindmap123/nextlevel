@@ -81,13 +81,18 @@ export default function ServicesOfferts() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: i * 0.06 }}
-              className="group grid md:grid-cols-[auto_1fr_1.2fr] gap-6 md:gap-12 py-10 md:py-12 border-b rule"
+              className="group relative grid md:grid-cols-[auto_1fr_1.2fr] gap-6 md:gap-12 py-10 md:py-12 border-b rule transition-colors duration-300 hover:bg-card/40 md:px-6 md:-mx-6 md:rounded-xl"
             >
+              {/* barre accent verticale au hover */}
+              <span
+                aria-hidden
+                className="absolute left-0 top-0 h-full w-[3px] bg-accent origin-top scale-y-0 group-hover:scale-y-100 transition-transform duration-300 rounded-full md:left-0"
+              />
               {/* Number + title */}
               <div className="flex items-start gap-4 md:w-[260px]">
-                <span className="font-display text-sm font-bold text-ash-dim pt-1">{p.number}</span>
+                <span className="font-display text-2xl font-bold text-ash-dim group-hover:text-accent transition-colors duration-300 pt-0.5 tabular-nums">{p.number}</span>
                 <div>
-                  <h3 className="font-display text-2xl md:text-3xl font-bold text-cream leading-tight tracking-[-0.02em]">
+                  <h3 className="font-display text-2xl md:text-3xl font-bold text-cream leading-tight tracking-[-0.02em] transition-transform duration-300 group-hover:translate-x-1">
                     {p.title}
                   </h3>
                   {p.tag && (
