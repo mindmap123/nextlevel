@@ -1,7 +1,7 @@
 "use client";
 
-import { useState } from "react";
-import { Plus, Minus } from "lucide-react";
+import { useState, useMemo } from "react";
+import { Plus, Minus, Search } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 
 const FAQS = [
@@ -36,7 +36,14 @@ const FAQS = [
 ];
 
 export default function FAQ() {
-  const [openIndex, setOpenIndex] = useState<number | null>(0);
+  const [openKey, setOpenKey] = useState<string | null>(FAQS[0].q);
+  const [query, setQuery] = useState("");
+
+  const filtered = useMemo(() => {
+    const q = query.trim().toLowerCase();
+    if (!q) return FAQS;
+    return FAQS.filter((f) => f.q.toLowerCase().includes(q) || f.a.toLowerCase().includes(q));
+  }, [query]);
 
   return (
     <section id="faq" className="py-20 md:py-28 bg-night">
@@ -55,38 +62,59 @@ export default function FAQ() {
             <br />
             <span className="text-accent">fréquentes.</span>
           </h2>
+
+          {/* Recherche */}
+          <div className="mt-8 flex items-center gap-3 bg-card border rule rounded-full px-5 py-3 focus-within:border-accent/50 transition-colors">
+            <Search className="w-4 h-4 text-ash-dim shrink-0" strokeWidth={2.25} />
+            <input
+              type="text"
+              value={query}
+              onChange={(e) => setQuery(e.target.value)}
+              placeholder="Rechercher une question…"
+              aria-label="Rechercher dans la FAQ"
+              className="bg-transparent w-full text-sm text-cream placeholder:text-ash-dim outline-none"
+            />
+          </div>
         </motion.div>
 
         <div className="border-t rule">
-          {FAQS.map((faq, i) => (
-            <div key={i} className="border-b rule">
-              <button
-                onClick={() => setOpenIndex(openIndex === i ? null : i)}
-                className="w-full flex items-center justify-between py-5 text-left group"
-              >
-                <span className="font-display font-bold text-cream text-lg pr-4 group-hover:text-accent transition-colors">
-                  {faq.q}
-                </span>
-                <span className="shrink-0 text-ash-dim group-hover:text-accent transition-colors">
-                  {openIndex === i ? <Minus className="w-5 h-5" /> : <Plus className="w-5 h-5" />}
-                </span>
-              </button>
+          {filtered.length === 0 && (
+            <p className="py-8 text-ash">
+              Aucune réponse pour «&nbsp;{query}&nbsp;». Posez-la nous directement à l&apos;appel.
+            </p>
+          )}
+          {filtered.map((faq) => {
+            const open = openKey === faq.q;
+            return (
+              <div key={faq.q} className="border-b rule">
+                <button
+                  onClick={() => setOpenKey(open ? null : faq.q)}
+                  className="w-full flex items-center justify-between py-5 text-left group"
+                >
+                  <span className="font-display font-bold text-cream text-lg pr-4 group-hover:text-accent transition-colors">
+                    {faq.q}
+                  </span>
+                  <span className="shrink-0 text-ash-dim group-hover:text-accent transition-colors">
+                    {open ? <Minus className="w-5 h-5" /> : <Plus className="w-5 h-5" />}
+                  </span>
+                </button>
 
-              <AnimatePresence>
-                {openIndex === i && (
-                  <motion.div
-                    initial={{ height: 0, opacity: 0 }}
-                    animate={{ height: "auto", opacity: 1 }}
-                    exit={{ height: 0, opacity: 0 }}
-                    transition={{ duration: 0.2 }}
-                    className="overflow-hidden"
-                  >
-                    <p className="pb-6 text-ash leading-relaxed max-w-[52ch]">{faq.a}</p>
-                  </motion.div>
-                )}
-              </AnimatePresence>
-            </div>
-          ))}
+                <AnimatePresence>
+                  {open && (
+                    <motion.div
+                      initial={{ height: 0, opacity: 0 }}
+                      animate={{ height: "auto", opacity: 1 }}
+                      exit={{ height: 0, opacity: 0 }}
+                      transition={{ duration: 0.2 }}
+                      className="overflow-hidden"
+                    >
+                      <p className="pb-6 text-ash leading-relaxed max-w-[52ch]">{faq.a}</p>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </div>
+            );
+          })}
         </div>
       </div>
     </section>
