@@ -55,10 +55,10 @@ export default function Valeurs() {
                   whileInView={{ opacity: 1, x: 0 }}
                   viewport={{ once: true }}
                   transition={{ delay: i * 0.05 }}
-                  className="flex items-start gap-4 py-4 border-b rule"
+                  className="group flex items-start gap-4 py-4 border-b rule transition-all duration-300 hover:gap-5 hover:pl-2"
                 >
-                  <X className="w-5 h-5 text-accent shrink-0 mt-0.5" strokeWidth={2.5} />
-                  <span className="text-ash leading-relaxed">{item}</span>
+                  <X className="w-5 h-5 text-accent shrink-0 mt-0.5 transition-transform duration-300 group-hover:rotate-90" strokeWidth={2.5} />
+                  <span className="text-ash leading-relaxed transition-colors duration-300 group-hover:text-cream group-hover:line-through group-hover:decoration-accent/60">{item}</span>
                 </motion.li>
               ))}
             </ul>
