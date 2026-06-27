@@ -143,8 +143,10 @@ export default function SeoLocal() {
             {/* Leviers */}
             <div className="mt-8 grid sm:grid-cols-2 gap-x-6 gap-y-4">
               {LEVIERS.map((l) => (
-                <div key={l.title} className="flex gap-3">
-                  <l.icon className="w-5 h-5 text-accent shrink-0 mt-0.5" strokeWidth={2} />
+                <div key={l.title} className="group flex gap-3">
+                  <span className="icon-chip shrink-0 flex items-center justify-center w-9 h-9 rounded-lg bg-accent/10 text-accent transition-colors duration-300 group-hover:bg-accent group-hover:text-white">
+                    <l.icon className="icon-pop w-[18px] h-[18px]" strokeWidth={2} />
+                  </span>
                   <div>
                     <p className="font-display font-bold text-cream text-sm">{l.title}</p>
                     <p className="text-xs text-ash-dim leading-relaxed">{l.desc}</p>
