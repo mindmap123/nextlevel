@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import { ArrowUpRight } from "lucide-react";
+import { useRef } from "react";
 import { usePopup } from "./PopupContext";
 import CTAButton from "@/components/ui/CTAButton";
 import AnimatedGradient from "@/components/ui/animated-gradient";
@@ -67,16 +68,32 @@ const HEADLINE: { w: string; a?: boolean }[] = [
 
 export default function Hero() {
   const { openPopup } = usePopup();
+  const auroraRef = useRef<HTMLDivElement>(null);
+
+  const handleMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    const el = auroraRef.current;
+    if (!el) return;
+    if (window.matchMedia("(pointer: coarse)").matches) return;
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    const r = e.currentTarget.getBoundingClientRect();
+    const px = (e.clientX - r.left) / r.width - 0.5;
+    const py = (e.clientY - r.top) / r.height - 0.5;
+    el.style.transform = `translate3d(${(px * 36).toFixed(1)}px, ${(py * 28).toFixed(1)}px, 0)`;
+  };
+
+  const handleLeave = () => {
+    if (auroraRef.current) auroraRef.current.style.transform = "";
+  };
 
   return (
     <>
-      <div className="relative bg-night text-cream grain overflow-hidden">
+      <div className="relative bg-night text-cream grain overflow-hidden" onMouseMove={handleMove} onMouseLeave={handleLeave}>
         {/* ── VAGUE animée (fond shader, signature du site original) ── */}
-        <div aria-hidden className="pointer-events-none absolute inset-0 z-0 overflow-hidden">
+        <div ref={auroraRef} aria-hidden className="hero-parallax pointer-events-none absolute inset-0 z-0 overflow-hidden">
           <div className="hero-aurora hero-aurora--1" style={{ top: "-14%", left: "28%", width: "62vw", height: "62vw" }} />
           <div className="hero-aurora hero-aurora--2" style={{ top: "8%", left: "-12%", width: "55vw", height: "55vw" }} />
           <div className="hero-aurora hero-aurora--3" style={{ top: "18%", right: "-16%", width: "52vw", height: "52vw" }} />
-          <AnimatedGradient config={WAVE_CONFIG} style={{ opacity: 0.6 }} />
+          <AnimatedGradient config={WAVE_CONFIG} style={{ opacity: 0.72 }} />
           <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(18,19,13,0.12)_0%,rgba(18,19,13,0.45)_55%,rgba(18,19,13,0.82)_100%)]" />
         </div>
 

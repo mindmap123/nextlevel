@@ -228,6 +228,18 @@
   50% { transform: translate3d(-5%, 7%, 0) scale(1.10); }
 }
 
+/* Hero parallax — auroras/shader dérivent doucement vers le curseur */
+.hero-parallax {
+  transition: transform 0.5s cubic-bezier(0.2, 0.8, 0.2, 1);
+  will-change: transform;
+}
+@media (pointer: coarse) {
+  .hero-parallax { transform: none !important; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .hero-parallax { transition: none; transform: none !important; }
+}
+
 /* CTA magnétique — suit légèrement le curseur + lueur au hover */
 .cta-magnetic {
   transition: transform 0.25s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.25s ease, filter 0.25s ease;
