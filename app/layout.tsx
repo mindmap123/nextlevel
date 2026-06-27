@@ -15,8 +15,8 @@ const plusJakartaSans = Plus_Jakarta_Sans({
   display: 'swap',
 });
 
-const TITLE = 'Next.Level · Sites qui convertissent vos visiteurs en clients';
-const DESCRIPTION = 'Agence web française. Sites haute-conversion, SEO local et outils métier sur mesure. Pour TPE et e-commerce.';
+const TITLE = 'Next.Level · L\'agence qui convertit vos visiteurs en clients';
+const DESCRIPTION = 'On transforme votre expertise en présence digitale performante. Sites web, applications sur mesure et visibilité locale.';
 const SITE_URL = 'https://next-level-agency.fr';
 const OG_IMAGE = `${SITE_URL}/og-image.png`;
 
