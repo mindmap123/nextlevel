@@ -15,9 +15,15 @@ const plusJakartaSans = Plus_Jakarta_Sans({
   display: 'swap',
 });
 
+const TITLE = 'Next.Level · Sites qui convertissent vos visiteurs en clients';
+const DESCRIPTION = 'Agence web française. Sites haute-conversion, SEO local et outils métier sur mesure. Pour TPE et e-commerce.';
+const SITE_URL = 'https://next-level-agency.fr';
+const OG_IMAGE = `${SITE_URL}/og-image.png`;
+
 export const metadata = {
-  title: 'Next Level | Votre site en 7 jours, pas en 3 mois',
-  description: 'Agence web française. Sites haute-conversion, SEO local et outils métier sur mesure, livrés en 7 jours. Audit honnête et gratuit.',
+  metadataBase: new URL(SITE_URL),
+  title: TITLE,
+  description: DESCRIPTION,
   icons: {
     icon: [
       { url: '/favicon.ico', sizes: 'any' },
@@ -26,6 +32,28 @@ export const metadata = {
       { url: '/icon.svg', type: 'image/svg+xml' },
     ],
     apple: '/apple-touch-icon.png',
+  },
+  openGraph: {
+    type: 'website',
+    locale: 'fr_FR',
+    url: SITE_URL,
+    siteName: 'Next.Level',
+    title: TITLE,
+    description: DESCRIPTION,
+    images: [
+      {
+        url: OG_IMAGE,
+        width: 1200,
+        height: 630,
+        alt: 'Next.Level — Sites qui convertissent vos visiteurs en clients',
+      },
+    ],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: TITLE,
+    description: DESCRIPTION,
+    images: [OG_IMAGE],
   },
 };
 
